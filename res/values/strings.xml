@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Controle de Presencas</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_logo">SGP</string>
+    <string name="text_usuario">Usuário</string>
+    <string name="text_senha">Senha</string>
+    <string name="text_logar">Entrar</string>
+    <string name="text_professor">Professor</string>
+    <string name="text_aluno">Aluno</string>
+    <string name="text_iniciar_aula">Iniciar Aula</string>
+    <string name="title_activity_activity_principal">Controle de Presencas</string>
+    <string name="text_nome">Nome</string>
+    <string name="text_turma">Turma: MO903 Redação Científica</string>
+    <string name="text_tempo_aula">Tempo de Aula</string>
+    <string name="text_encerrar_aula">Encerrar Aula</string>
+    <string name="title_activity_activity_aula">Aula</string>
+    <string name="text_consultar_turma">Consultar Turma</string>
+
+</resources>

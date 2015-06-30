@@ -1,0 +1,125 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#4A83C9"
+    android:gravity="center"
+	tools:context="com.example.controledepresencas.ActivityLogin"
+    >
+	
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="vertical"
+	    	android:gravity="center"
+	    	android:layout_weight="1"
+	    	 >
+		    <TextView
+		        android:id="@+id/textViewLogin"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:text="@string/text_logo"
+		        android:textColor="#FFFFFF"
+		        android:textSize="50sp"
+		        android:textStyle="bold" />
+	
+		    <ImageView
+		        android:id="@+id/imageViewLogo"
+		        android:layout_width="129dp"
+		        android:layout_height="129dp"
+		        android:src="@drawable/logo_principal" >
+		        
+		    </ImageView>
+	</LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	android:gravity="center"
+    	android:layout_weight="2"
+    	 >
+	     <TextView
+	        android:id="@+id/textViewUsuario"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/text_usuario"
+	        android:textColor="#FFFFFF"
+	        android:textSize="22sp"
+	        android:textStyle="bold"
+	        android:layout_marginTop="10dp" />
+	    
+	    <EditText 
+	        android:id="@+id/editTextUsuario"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textColor="#000000"
+	        android:background="#FFFFFF"
+	        android:layout_marginStart="50dp"
+	        android:layout_marginEnd="50dp"
+	        android:textSize="22sp"
+	        android:text="jef"
+	        />
+	    
+	    <TextView
+	        android:id="@+id/textViewSenha"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/text_senha"
+	        android:textColor="#FFFFFF"
+	        android:textSize="22sp"
+	        android:textStyle="bold"
+	        android:layout_marginTop="10dp"
+	        />
+	    
+	    <EditText 
+	        android:id="@+id/editTextSenha"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textColor="#000000"
+	        android:background="#FFFFFF"
+	        android:layout_marginStart="50dp"
+	        android:layout_marginEnd="50dp"
+	        android:textSize="22sp"
+	        android:layout_marginBottom="10dp"
+	        android:text="12345"
+	        />
+	    
+	    <Button
+	        android:id="@+id/buttonLogar"
+	        android:layout_width="fill_parent"
+	        android:layout_height="29dp"
+	        android:layout_marginEnd="50dp"
+	        android:layout_marginStart="50dp"
+	        android:background="#3FB041"
+	        android:onClick="onClickLogar"
+	        android:text="@string/text_logar"
+	        android:textColor="#FFFFFF"
+	        android:textStyle="bold" />
+
+	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" 
+        android:gravity="end">
+
+        <ImageButton
+            android:id="@+id/imgButtonSair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sair"
+            android:onClick="sairAplicativo" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<!--  " -->

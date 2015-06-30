@@ -1,0 +1,133 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4A83C9"
+    android:orientation="vertical" 
+    tools:context="com.example.controledepresencas.ActivityAula">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_weight="3" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewTipoUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_professor"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+            
+            <TextView
+                android:id="@+id/textViewNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_nome"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="end"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imageViewProfessorAluno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/text_professor"
+                android:src="@drawable/professor" >
+            </ImageView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:layout_weight="6" >
+
+	       <TextView
+	                android:id="@+id/textViewTurma"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="@string/text_turma"
+	                android:textColor="#FFFFFF"
+	                android:textSize="20sp"
+	                android:textStyle="bold" />
+	       
+	       <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center|top"
+	        android:orientation="vertical" >
+	            <TextView
+	                android:id="@+id/textViewTempoAula"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="@string/text_tempo_aula"
+	                android:textColor="#FFFFFF"
+	                android:textSize="20sp"
+	                android:textStyle="bold" />
+
+	            <ImageView
+	                android:id="@+id/imageView1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:src="@drawable/relogio" />
+	
+		       <Chronometer
+		           android:id="@+id/chronoAula"
+		           android:layout_width="wrap_content"
+		           android:layout_height="wrap_content"
+		           android:text="Chronometer"
+		           android:textColor="#FFFFFF"
+		           android:textSize="50sp"
+		           android:textStyle="bold" />
+
+	       </LinearLayout>
+	        
+	        <Button
+		        android:id="@+id/buttonEncerrarAula"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginEnd="50dp"
+		        android:layout_marginStart="50dp"
+		        android:background="#3FB041"
+		        android:onClick="iniciarAula"
+		        android:text="@string/text_encerrar_aula"
+		        android:textColor="#FFFFFF"
+		        android:textStyle="bold"
+		        android:layout_marginTop="20dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" 
+        android:gravity="end|bottom">
+
+        <ImageButton
+            android:id="@+id/imgButtonSair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sair" />
+
+    </LinearLayout>
+
+</LinearLayout>
