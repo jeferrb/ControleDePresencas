@@ -12,7 +12,7 @@ import android.util.Log;
 public class XmlManager {
 	static String TAG = "XmlManager";
 	//static String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<LoginUsuario>\n<sucess>true</sucess>\n<tipo>Aluno</tipo>\n</LoginUsuario>";
-
+	static final String text_network_fail = "Falha de rede, por favor verifique sua conexão e tente novamente";
 	public static String[] manageXmlLogin(String rawXml){
 		//rawXml = test;
 		/*
@@ -31,7 +31,66 @@ public class XmlManager {
         int event;
         String text=null;
         String[] retorno = new String[2];
-        retorno [0] = "Falha descolhecida";
+        retorno [0] = text_network_fail;
+        try {
+    		InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
+            xmlFactoryObject = XmlPullParserFactory.newInstance();
+            XmlPullParser myParser = xmlFactoryObject.newPullParser();
+            
+            myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            myParser.setInput(stream, null);
+           event = myParser.getEventType();
+           while (event != XmlPullParser.END_DOCUMENT) {
+              String name=myParser.getName();
+              switch (event){
+                 case XmlPullParser.START_TAG:
+                 break;
+                 case XmlPullParser.TEXT:
+                 text = myParser.getText();
+                 break;
+                 case XmlPullParser.END_TAG:
+                	 if (name.equals("sucess")){
+                		 if(text.equals("false")){
+                			 retorno [0] = "Usuário já conectado";
+                			 return retorno;
+                		 }
+                	 }
+                	 if (name.equals("tipo")){
+                		 retorno [0] = text; 
+                	 }
+                	 if (name.equals("chave")){
+                		 Log.e(TAG, "Chave: "+text );
+                		retorno [1] = text;
+                	 }
+                 break;
+              }
+              event = myParser.next();
+           }
+        }
+        catch (Exception e) {
+           e.printStackTrace();
+        }
+		return retorno;
+    }
+	
+	public static String[] manageXmlTick(String rawXml){
+		//rawXml = test;
+		/*
+		 * return[0]: status
+		 * return[1]: 
+		*/
+		
+		/*	input example:
+		 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+		 *	<LoginUsuario>
+		 * 		<sucess>true</sucess>
+		 * 	</LoginUsuario> 
+		*/
+		XmlPullParserFactory xmlFactoryObject;
+        int event;
+        String text=null;
+        String[] retorno = new String[2];
+        retorno [0] = text_network_fail;
         try {
     		InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
             xmlFactoryObject = XmlPullParserFactory.newInstance();
@@ -134,7 +193,7 @@ public class XmlManager {
         catch (Exception e) {
            e.printStackTrace();
         }
-		return "Falha de rede!";
+		return text_network_fail;
     }
 
 	
@@ -248,7 +307,7 @@ public class XmlManager {
         catch (Exception e) {
            e.printStackTrace();
         }
-		return "Falha de rede!";
+		return text_network_fail;
     }
 	
 	

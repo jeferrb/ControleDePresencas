@@ -104,10 +104,18 @@
         android:layout_weight="1" 
         android:gravity="end|bottom">
 
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="debugTick"
+            android:onClick="debugTick"/>
+
         <ImageButton
             android:id="@+id/imgButtonSair"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickDeslogar"
             android:src="@drawable/sair" />
 
     </LinearLayout>

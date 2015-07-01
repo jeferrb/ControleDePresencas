@@ -33,10 +33,11 @@ public final class R {
         public static final int sair=0x7f020008;
     }
     public static final class id {
-        public static final int ButtonConsultarTurma=0x7f080012;
-        public static final int action_settings=0x7f080013;
+        public static final int ButtonConsultarTurma=0x7f080013;
+        public static final int action_settings=0x7f080014;
+        public static final int button1=0x7f080010;
         public static final int buttonEncerrarAula=0x7f080007;
-        public static final int buttonIniciarAula=0x7f080011;
+        public static final int buttonIniciarAula=0x7f080012;
         public static final int buttonLogar=0x7f08000f;
         public static final int chronoAula=0x7f080006;
         public static final int editTextSenha=0x7f08000e;
@@ -45,7 +46,7 @@ public final class R {
         public static final int imageViewLogo=0x7f08000a;
         public static final int imageViewProfessorAluno=0x7f080002;
         public static final int imgButtonSair=0x7f080008;
-        public static final int spinnerTurmas=0x7f080010;
+        public static final int spinnerTurmas=0x7f080011;
         public static final int textViewLogin=0x7f080009;
         public static final int textViewNome=0x7f080001;
         public static final int textViewSenha=0x7f08000d;
