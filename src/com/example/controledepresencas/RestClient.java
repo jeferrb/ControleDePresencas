@@ -25,8 +25,8 @@ public class RestClient extends AsyncTask<String, String, String> {
 	private static String TAG = "RestClient";
     private  String messageReceived = null;
 
-    private static String DIRECCION_GET  = "http://179.184.165.195/projeto/api/";
-    private static String DIRECCION_POST = "http://179.184.165.195/projeto/api/";
+    private static String DIRECCION_GET  = "http://192.168.15.1:8080/CPresenca/api/";
+    private static String DIRECCION_POST = DIRECCION_GET;
 
     public RestClient(){
     }
@@ -92,6 +92,7 @@ public class RestClient extends AsyncTask<String, String, String> {
 		String retorno = null;
 		try {
 			retorno = obj.execute(request).get();
+			Log.e(TAG, "Get: "+request[1]);
 		} catch (InterruptedException e) {
 			Log.e(TAG, "ERROR: " + e.toString() + "\nMSG: " + e.getMessage());
 		} catch (ExecutionException e) {

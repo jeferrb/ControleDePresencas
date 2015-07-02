@@ -16,8 +16,8 @@ public class ActivityLogin extends Activity {
 	}
 	
 	public void onClickLogar (View v){
-		EditText login = (EditText) findViewById(R.id.editTextUsuario);
-		EditText senha = (EditText) findViewById(R.id.editTextSenha);
+		String login = ((EditText)findViewById(R.id.editTextUsuario)).getText().toString();
+		String senha = ((EditText) findViewById(R.id.editTextSenha)).getText().toString();
 		
 		if(!(login != null && login.length()>0 && senha != null && senha.length()>0)) {
 			this.showPopUpMessage("Login e Senha são campos obligatórios");
@@ -32,7 +32,7 @@ public class ActivityLogin extends Activity {
 		
 		if (resultado.equals("Aluno")||resultado.equals("Professor")) {
 			Bundle params = new Bundle ();
-			params.putString("nome", login.getText().toString());
+			params.putString("nome", login);
 			params.putString("tipo", resultado);
 			
 			Intent intent = new Intent(this, ActivityPrincipal.class);
