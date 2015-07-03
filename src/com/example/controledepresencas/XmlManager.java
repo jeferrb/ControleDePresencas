@@ -195,7 +195,62 @@ public class XmlManager {
         }
 		return text_network_fail;
     }
-
+	public static String manageXmlFinishClass(String rawXml){
+		/*
+		 * return:
+		 * 	0 in case of fail
+		 * 	1 in case of success
+		*/
+		
+		/*	input examples:
+		*  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+		*	<LoginUsuario>
+		*		<sucess>true</sucess>
+		*	</LoginUsuario>
+		*
+		*<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+		*	<LoginUsuario>
+		*		<sucess>false</sucess>
+		*		<tipo>Chave errada</tipo>
+		*	</LoginUsuario>
+		*
+		*/
+		XmlPullParserFactory xmlFactoryObject;
+        int event;
+        String text=null;
+        try {
+    		InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
+            xmlFactoryObject = XmlPullParserFactory.newInstance();
+            XmlPullParser myParser = xmlFactoryObject.newPullParser();
+            
+            myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            myParser.setInput(stream, null);
+           event = myParser.getEventType();
+           while (event != XmlPullParser.END_DOCUMENT) {
+              String name=myParser.getName();
+              switch (event){
+                 case XmlPullParser.START_TAG:
+                 break;
+                 case XmlPullParser.TEXT:
+                 text = myParser.getText();
+                 break;
+                 case XmlPullParser.END_TAG:
+                	 if (name.equals("sucess")){
+                		 if(text.equals("true")){
+                			 return "Sucesso";
+                		 }else
+                			 return text;
+                	 }
+                 break;
+              }
+              event = myParser.next();
+           }
+        }
+        catch (Exception e) {
+           e.printStackTrace();
+        }
+		return "Falha desconhecida";
+    }
 	
 	public static ArrayList<String[]> manageXmlTurmas(String rawXml){
 		/*

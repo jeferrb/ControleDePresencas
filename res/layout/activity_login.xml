@@ -52,18 +52,17 @@
 	        android:textStyle="bold"
 	        android:layout_marginTop="10dp" />
 	    
-	    <EditText 
+	    <EditText
 	        android:id="@+id/editTextUsuario"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:textColor="#000000"
-	        android:background="#FFFFFF"
-	        android:layout_marginStart="50dp"
 	        android:layout_marginEnd="50dp"
-	        android:textSize="22sp"
-	        android:text="jef"
-	        />
+	        android:layout_marginStart="50dp"
+	        android:background="#FFFFFF"
+	        android:gravity="center"
+	        android:text="Eliane"
+	        android:textColor="#000000"
+	        android:textSize="22sp" />
 	    
 	    <TextView
 	        android:id="@+id/textViewSenha"

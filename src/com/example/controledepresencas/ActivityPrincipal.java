@@ -75,8 +75,8 @@ public class ActivityPrincipal extends Activity {
 	}
 	public void listarTurmas() {
 		//http://crunchify.com/how-to-iterate-through-java-list-4-way-to-iterate-through-loop/
-		//String retorno = RestClient.doRequisition("aula/usuario/"+this.userName+"/userType/"+this.userType);
-		String retorno = "";
+		String retorno = RestClient.doRequisition("aula/usuario/"+this.userName+"/tipo/"+this.userType);
+		//String retorno = "";
 		ArrayList<String[]> ret = XmlManager.manageXmlTurmas(retorno);
 		nomesTurmas = new String[ret.size()];
 		IdTurmas = new String[ret.size()];
@@ -99,8 +99,15 @@ public class ActivityPrincipal extends Activity {
 				Button butaoIniciarAula = (Button) findViewById(R.id.buttonIniciarAula);
 				Button butaoConsultarTurma = (Button) findViewById(R.id.ButtonConsultarTurma);
 				try {//may occur a fail or there are no classes registered
-					butaoIniciarAula.setEnabled(isOpenTurmas[position]);
-					butaoConsultarTurma.setEnabled(isOpenTurmas[position]);
+					if(userType.equals("Aluno")){
+						butaoIniciarAula.setEnabled(isOpenTurmas[position]);
+						butaoConsultarTurma.setEnabled(isOpenTurmas[position]);
+					}else if(userType.equals("Professor")){
+						butaoIniciarAula.setText("Abrir Aula");
+						butaoIniciarAula.setEnabled(!isOpenTurmas[position]);
+						butaoConsultarTurma.setEnabled(isOpenTurmas[position]);
+					}
+					
 				} catch (Exception e) {
 					butaoIniciarAula.setEnabled(false);
 					butaoConsultarTurma.setEnabled(false);
@@ -113,20 +120,6 @@ public class ActivityPrincipal extends Activity {
 				// Do nothing
 			}
 		});
-	}
-	
-	public void onClickIniciarAula(){
-		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
-		
-		Bundle params = new Bundle ();
-		params.putString("userName", this.userName);
-		params.putString("turmaID", nomesTurmas[listaTurmas.getSelectedItemPosition()]);
-		
-		Intent intent = new Intent(this, ActivityAula.class);
-		intent.putExtras(params);
-		
-		startActivity(intent);
-		finish();
 	}
 	
 	public void sendTick(){
@@ -198,7 +191,7 @@ public class ActivityPrincipal extends Activity {
 	
 	void doLogout() {
 		// Deslogar no servidor
-		String retorno = RestClient.doRequisition("login/usuario/" + this.userName + "/userType/" + this.userType);
+		String retorno = RestClient.doRequisition("login/usuario/" + this.userName + "/tipo/" + this.userType);
 		retorno = XmlManager.manageXmlLogout(retorno);
 		if (retorno.equals("Sucesso")) {
 			finish();
@@ -220,6 +213,18 @@ public class ActivityPrincipal extends Activity {
 	
 	public void onClickIniciarAula(View v){
 		//TODO 
+		showToastMessage("Iniciando aula");
+		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
+		
+		Bundle params = new Bundle ();
+		params.putString("nome", this.userName);
+		params.putString("turmaID", nomesTurmas[listaTurmas.getSelectedItemPosition()]);
+		
+		Intent intent = new Intent(this, ActivityAula.class);
+		intent.putExtras(params);
+		
+		startActivity(intent);
+		finish();
 	}
 	public void onClickDeslogar(View v){
 		askForLogout();

@@ -110,24 +110,11 @@
 		        android:layout_marginEnd="50dp"
 		        android:layout_marginStart="50dp"
 		        android:background="#3FB041"
-		        android:onClick="iniciarAula"
+		        android:onClick="onClickEncerrarAula"
 		        android:text="@string/text_encerrar_aula"
 		        android:textColor="#FFFFFF"
 		        android:textStyle="bold"
 		        android:layout_marginTop="20dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" 
-        android:gravity="end|bottom">
-
-        <ImageButton
-            android:id="@+id/imgButtonSair"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sair" />
-
     </LinearLayout>
 
 </LinearLayout>
