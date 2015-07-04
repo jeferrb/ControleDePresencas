@@ -233,4 +233,19 @@ public class ActivityPrincipal extends Activity {
 		sendTick();
 	}
 	
+	public void onClickConsultarTurmas(View v){
+		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
+		
+		Bundle params = new Bundle ();
+		params.putString("nome", this.userName);
+		params.putString("turmaID", nomesTurmas[listaTurmas.getSelectedItemPosition()]);
+		
+		Intent intent = new Intent(this, ActivityAlterarPresencas.class);
+		intent.putExtras(params);
+		
+		startActivity(intent);
+		finish();
+	}
+	
+	
 }
