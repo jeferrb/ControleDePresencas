@@ -37,28 +37,28 @@ public final class R {
     public static final class id {
         public static final int ButtonConsultarTurma=0x7f080014;
         public static final int action_settings=0x7f080017;
-        public static final int buttonEncerrarAula=0x7f08000a;
+        public static final int buttonEncerrarAula=0x7f080009;
         public static final int buttonIniciarAula=0x7f080013;
-        public static final int buttonLogar=0x7f080011;
-        public static final int editTextSenha=0x7f080010;
-        public static final int editTextUsuario=0x7f08000e;
-        public static final int imageView1=0x7f080009;
+        public static final int buttonLogar=0x7f080010;
+        public static final int editTextSenha=0x7f08000f;
+        public static final int editTextUsuario=0x7f08000d;
+        public static final int imageView1=0x7f080008;
         public static final int imageViewAusentePresente=0x7f080016;
-        public static final int imageViewLogo=0x7f08000c;
+        public static final int imageViewLogo=0x7f08000b;
         public static final int imageViewProfessorAluno=0x7f080002;
-        public static final int imgButtonSair=0x7f080004;
+        public static final int imgButtonSair=0x7f080011;
         public static final int listViewPresencas=0x7f080003;
         public static final int spinnerAlunos=0x7f080001;
         public static final int spinnerTurmas=0x7f080012;
         public static final int textViewDataAula=0x7f080015;
-        public static final int textViewLogin=0x7f08000b;
-        public static final int textViewNome=0x7f080006;
+        public static final int textViewLogin=0x7f08000a;
+        public static final int textViewNome=0x7f080005;
         public static final int textViewSelecioneAluno=0x7f080000;
-        public static final int textViewSenha=0x7f08000f;
-        public static final int textViewTempoAula=0x7f080008;
-        public static final int textViewTipoUsuario=0x7f080005;
-        public static final int textViewTurma=0x7f080007;
-        public static final int textViewUsuario=0x7f08000d;
+        public static final int textViewSenha=0x7f08000e;
+        public static final int textViewTempoAula=0x7f080007;
+        public static final int textViewTipoUsuario=0x7f080004;
+        public static final int textViewTurma=0x7f080006;
+        public static final int textViewUsuario=0x7f08000c;
     }
     public static final class layout {
         public static final int activity_alterar_presencas=0x7f030000;

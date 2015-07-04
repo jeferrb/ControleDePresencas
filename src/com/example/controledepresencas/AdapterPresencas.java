@@ -70,7 +70,6 @@ public class AdapterPresencas extends BaseAdapter {
 		} else {
 			imagePresenca.setImageResource(R.drawable.ausente);
 		}
-
 		return layout;
 	}
 

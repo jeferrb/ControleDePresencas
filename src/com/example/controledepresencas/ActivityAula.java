@@ -42,7 +42,7 @@ public class ActivityAula extends Activity {
 		}
 		ajustarTela();
 	}
-	
+
 	public void ajustarTela() {
 		// Ajustando Tela Aluno e Professor
 		TextView textView;
@@ -51,7 +51,7 @@ public class ActivityAula extends Activity {
 		imgView = (ImageView) findViewById(R.id.imageViewProfessorAluno);
 		if (this.userType.equals(TIPO_PROFESSOR)) {
 			textView.setText(TIPO_PROFESSOR);
-			
+
 		} else {
 			textView.setText(TIPO_ALUNO);
 			imgView.setImageResource(R.drawable.aluno);
@@ -86,14 +86,6 @@ public class ActivityAula extends Activity {
 		retorno = XmlManager.manageXmlFinishClass(retorno);
 		// TODO
 		if (retorno.equals("Sucesso")) {
-			Bundle params = new Bundle();
-			params.putString("nome", userName);
-			params.putString("tipo", userType);
-
-			Intent intent = new Intent(thisActivity, ActivityPrincipal.class);
-			intent.putExtras(params);
-
-			startActivity(intent);
 			finish();
 		} else {
 			showPopUpMessage(retorno);
@@ -147,7 +139,7 @@ public class ActivityAula extends Activity {
 						String retorno = RestClient.doRequisition("aula/aluno/" + userName + "/posix/" + Double.toString(latitude) + "/posiy/" + Double.toString(longitude));
 						String[] ret = XmlManager.manageXmlTick(retorno);
 						if (!ret[0].equals("Sucesso")) {
-							//TODO
+							// TODO
 							showToastMessage("Aula encerrada XX% de presença");
 							encerrarAulaLocalmente();
 						}
@@ -159,10 +151,10 @@ public class ActivityAula extends Activity {
 				try {
 					gps.stopUsingGPS();
 					myTimer.cancel();
-					Bundle params = new Bundle ();
+					Bundle params = new Bundle();
 					params.putString("nome", userName);
 					params.putString("tipo", userType);
-					
+
 					Intent intent = new Intent(thisActivity, ActivityPrincipal.class);
 					intent.putExtras(params);
 					startActivity(intent);
