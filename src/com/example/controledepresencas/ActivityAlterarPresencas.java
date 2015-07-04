@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -32,7 +27,7 @@ public class ActivityAlterarPresencas extends Activity {
 		
 		//aqui vai a chamada rest para listar todos os alunos de uma determinada turma...
 		
-		alunos = new String[]{"Alan","Pedro", "Jefferson", "João", "Fulano1", "Fulano2"};
+		alunos = new String[]{"Alan","Pedro", "Jefferson", "Joï¿½o", "Fulano1", "Fulano2"};
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, alunos);
 		Spinner listaAlunos = (Spinner) findViewById(R.id.spinnerAlunos);
 		

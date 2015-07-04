@@ -50,7 +50,7 @@
                 android:id="@+id/imageViewProfessorAluno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/text_aluno"
+                android:contentDescription="@string/text_tipo_usuario"
                 android:src="@drawable/aluno" >
             </ImageView>
         </LinearLayout>

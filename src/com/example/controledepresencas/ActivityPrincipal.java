@@ -169,7 +169,6 @@ public class ActivityPrincipal extends Activity {
 		intent.putExtras(params);
 		
 		startActivity(intent);
-		finish();
 	}
 	public void onClickDeslogar(View v){
 		askForLogout();
@@ -190,7 +189,6 @@ public class ActivityPrincipal extends Activity {
 		intent.putExtras(params);
 		
 		startActivity(intent);
-		finish();
 	}
 	
 	

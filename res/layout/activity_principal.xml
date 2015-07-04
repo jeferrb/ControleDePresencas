@@ -93,11 +93,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
             android:background="#3FB041"
-<<<<<<< HEAD
             android:onClick="onClickIniciarAula"
-=======
-            android:onClick="onClickConsultarTurmas"
->>>>>>> 6dae38251abaeb435b0835a0c24a13c0e7629544
             android:text="@string/text_consultar_turma"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
