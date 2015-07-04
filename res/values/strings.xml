@@ -17,6 +17,12 @@
     <string name="text_encerrar_aula">Encerrar Aula</string>
     <string name="title_activity_activity_aula">Aula</string>
     <string name="text_consultar_turma">Consultar Turma</string>
+<<<<<<< HEAD
     <string name="text_em_aula">Em aula</string>
+=======
+    <string name="title_activity_activity_alterar_presencas">Alteração de Presenças</string>
+    <string name="text_selecione_aluno">Selecione o Aluno</string>
+    <string name="text_data">00/00/00</string>
+>>>>>>> 6dae38251abaeb435b0835a0c24a13c0e7629544
 
 </resources>

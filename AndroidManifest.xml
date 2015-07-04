@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="14" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -35,6 +35,10 @@
             android:name=".ActivityAula"
             android:label="@string/title_activity_activity_aula"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ActivityAlterarPresencas"
+            android:label="@string/title_activity_activity_alterar_presencas" >
         </activity>
     </application>
 
