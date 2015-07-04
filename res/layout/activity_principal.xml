@@ -7,6 +7,7 @@
     tools:context="com.example.controledepresencas.ActivityPrincipal">
 
     <LinearLayout
+        android:baselineAligned="false"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -24,9 +25,9 @@
                 android:id="@+id/textViewTipoUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_professor"
+                android:text="@string/text_tipo_usuario"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
             
             <TextView
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_nome"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />            
         </LinearLayout>
 
@@ -50,7 +51,7 @@
                 android:id="@+id/imageViewProfessorAluno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/text_professor"
+                android:contentDescription="@string/text_tipo_usuario"
                 android:src="@drawable/professor" >
             </ImageView>
         </LinearLayout>
@@ -92,7 +93,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
             android:background="#3FB041"
-            android:onClick="iniciarAula"
+            android:onClick="onClickIniciarAula"
             android:text="@string/text_consultar_turma"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
@@ -103,13 +104,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" 
         android:gravity="end|bottom">
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="debugTick"
-            android:onClick="debugTick"/>
 
         <ImageButton
             android:id="@+id/imgButtonSair"

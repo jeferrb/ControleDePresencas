@@ -1,17 +1,12 @@
 package com.example.controledepresencas;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,15 +24,12 @@ public class ActivityPrincipal extends Activity {
 	private String[] nomesTurmas;
 	private String[] IdTurmas ;
 	private boolean[] isOpenTurmas;
-	private long timeOut = 100;//milliseconds
-	private Timer myTimer;
-	private boolean isEmAula = false;
-	private GPSTracker gps = new GPSTracker(ActivityPrincipal.this);
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
+		
 		Intent intent = getIntent();
 		if (intent != null) {
 			Bundle params = intent.getExtras();
@@ -89,9 +81,7 @@ public class ActivityPrincipal extends Activity {
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesTurmas);
 		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
-		
 		listaTurmas.setAdapter(adapter);
-		
 		listaTurmas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 			@Override
@@ -122,51 +112,6 @@ public class ActivityPrincipal extends Activity {
 		});
 	}
 	
-	public void sendTick(){
-		 // GPSTracker class & a class object
-	    gps = new GPSTracker(this);
-        // Check if GPS enabled
-        if(gps.canGetLocation()) {
-           tickScheduler();
-            
-        } else {
-            // Can't get location.
-            // GPS or network is not enabled.
-            // Ask user to enable GPS/network in settings.
-            gps.showSettingsAlert();
-        }
-	}
-
-	private void tickScheduler() {
-		myTimer = new Timer();
-		myTimer.scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {
-				Handler handler = new Handler(Looper.getMainLooper());
-				handler.post(new Runnable() {
-				        @Override
-				        public void run() {double latitude = gps.getLatitude();
-							double longitude = gps.getLongitude();
-							Log.e("latitude", Double.toString(latitude));
-							Log.e("longitude", Double.toString(longitude));
-				        	Toast.makeText(getApplicationContext(), "Tick envido\nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-				        	
-				        	//TODO de acordo com a resposta do TICK atualizar isEmAula
-				        	String retorno = RestClient.doRequisition("aula/aluno/" + userName + "/posix/" + Double.toString(latitude) + "/posiy/" + Double.toString(longitude));
-				    		String[] ret = XmlManager.manageXmlTick(retorno);
-				    		
-				        }
-				    });
-				if (!isEmAula) {
-					myTimer.cancel();
-					gps.stopUsingGPS();
-				}
-			}
-		}, 0, timeOut);
-	}
-
-	TimerTask doThis;
-
 	@Override
 	protected void onPause() {
 	    //myTimer.cancel();
@@ -229,8 +174,9 @@ public class ActivityPrincipal extends Activity {
 	public void onClickDeslogar(View v){
 		askForLogout();
 	}
-	public void debugTick(View v){
-		sendTick();
+	
+	public void onClickConsultarTurma(View view){
+		
 	}
 	
 }

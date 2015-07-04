@@ -33,27 +33,25 @@ public final class R {
         public static final int sair=0x7f020008;
     }
     public static final class id {
-        public static final int ButtonConsultarTurma=0x7f080013;
-        public static final int action_settings=0x7f080014;
-        public static final int button1=0x7f08000f;
-        public static final int buttonEncerrarAula=0x7f080007;
-        public static final int buttonIniciarAula=0x7f080012;
-        public static final int buttonLogar=0x7f08000e;
-        public static final int chronoAula=0x7f080006;
-        public static final int editTextSenha=0x7f08000d;
-        public static final int editTextUsuario=0x7f08000b;
+        public static final int ButtonConsultarTurma=0x7f080011;
+        public static final int action_settings=0x7f080012;
+        public static final int buttonEncerrarAula=0x7f080006;
+        public static final int buttonIniciarAula=0x7f080010;
+        public static final int buttonLogar=0x7f08000d;
+        public static final int editTextSenha=0x7f08000c;
+        public static final int editTextUsuario=0x7f08000a;
         public static final int imageView1=0x7f080005;
-        public static final int imageViewLogo=0x7f080009;
+        public static final int imageViewLogo=0x7f080008;
         public static final int imageViewProfessorAluno=0x7f080002;
-        public static final int imgButtonSair=0x7f080010;
-        public static final int spinnerTurmas=0x7f080011;
-        public static final int textViewLogin=0x7f080008;
+        public static final int imgButtonSair=0x7f08000e;
+        public static final int spinnerTurmas=0x7f08000f;
+        public static final int textViewLogin=0x7f080007;
         public static final int textViewNome=0x7f080001;
-        public static final int textViewSenha=0x7f08000c;
+        public static final int textViewSenha=0x7f08000b;
         public static final int textViewTempoAula=0x7f080004;
         public static final int textViewTipoUsuario=0x7f080000;
         public static final int textViewTurma=0x7f080003;
-        public static final int textViewUsuario=0x7f08000a;
+        public static final int textViewUsuario=0x7f080009;
     }
     public static final class layout {
         public static final int activity_aula=0x7f030000;
@@ -68,20 +66,20 @@ public final class R {
         public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050001;
-        public static final int text_aluno=0x7f050008;
-        public static final int text_consultar_turma=0x7f050010;
-        public static final int text_encerrar_aula=0x7f05000e;
-        public static final int text_iniciar_aula=0x7f050009;
+        public static final int text_consultar_turma=0x7f05000f;
+        public static final int text_em_aula=0x7f050010;
+        public static final int text_encerrar_aula=0x7f05000d;
+        public static final int text_iniciar_aula=0x7f050008;
         public static final int text_logar=0x7f050006;
         public static final int text_logo=0x7f050003;
-        public static final int text_nome=0x7f05000b;
-        public static final int text_professor=0x7f050007;
+        public static final int text_nome=0x7f05000a;
         public static final int text_senha=0x7f050005;
-        public static final int text_tempo_aula=0x7f05000d;
-        public static final int text_turma=0x7f05000c;
+        public static final int text_tempo_aula=0x7f05000c;
+        public static final int text_tipo_usuario=0x7f050007;
+        public static final int text_turma=0x7f05000b;
         public static final int text_usuario=0x7f050004;
-        public static final int title_activity_activity_aula=0x7f05000f;
-        public static final int title_activity_activity_principal=0x7f05000a;
+        public static final int title_activity_activity_aula=0x7f05000e;
+        public static final int title_activity_activity_principal=0x7f050009;
     }
     public static final class style {
         /** 

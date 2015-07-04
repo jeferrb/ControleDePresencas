@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+
 public class ActivityLogin extends Activity {
 
 	@Override
@@ -46,18 +47,6 @@ public class ActivityLogin extends Activity {
 	}
 	
 	public void onClickSairAplicativo(View v){
-		finish();
-	}
-	public void onClickButton(View v){
-		//TODO consertar essa gambi de debug
-		Bundle params = new Bundle ();
-		params.putString("nome", "Joao");
-		params.putString("tipo", "Aluno");
-		
-		Intent intent = new Intent(this, ActivityPrincipal.class);
-		intent.putExtras(params);
-		
-		startActivity(intent);
 		finish();
 	}
 	@Override

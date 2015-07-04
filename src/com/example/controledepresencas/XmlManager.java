@@ -13,6 +13,7 @@ public class XmlManager {
 	static String TAG = "XmlManager";
 	//static String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<LoginUsuario>\n<sucess>true</sucess>\n<tipo>Aluno</tipo>\n</LoginUsuario>";
 	static final String text_network_fail = "Falha de rede, por favor verifique sua conexão e tente novamente";
+	static final String text_unknow_error = "Erro desconhecido, por favor contate o administrador";
 	public static String[] manageXmlLogin(String rawXml){
 		//rawXml = test;
 		/*
@@ -74,17 +75,12 @@ public class XmlManager {
     }
 	
 	public static String[] manageXmlTick(String rawXml){
-		//rawXml = test;
 		/*
 		 * return[0]: status
 		 * return[1]: 
 		*/
-		
 		/*	input example:
-		 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-		 *	<LoginUsuario>
-		 * 		<sucess>true</sucess>
-		 * 	</LoginUsuario> 
+		 * 
 		*/
 		XmlPullParserFactory xmlFactoryObject;
         int event;
