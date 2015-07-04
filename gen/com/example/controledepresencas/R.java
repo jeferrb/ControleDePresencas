@@ -35,37 +35,40 @@ public final class R {
         public static final int sair=0x7f02000a;
     }
     public static final class id {
-        public static final int ButtonConsultarTurma=0x7f080014;
-        public static final int action_settings=0x7f080017;
-        public static final int buttonEncerrarAula=0x7f080009;
-        public static final int buttonIniciarAula=0x7f080013;
-        public static final int buttonLogar=0x7f080010;
-        public static final int editTextSenha=0x7f08000f;
-        public static final int editTextUsuario=0x7f08000d;
-        public static final int imageView1=0x7f080008;
-        public static final int imageViewAusentePresente=0x7f080016;
-        public static final int imageViewLogo=0x7f08000b;
-        public static final int imageViewProfessorAluno=0x7f080002;
-        public static final int imgButtonSair=0x7f080011;
-        public static final int listViewPresencas=0x7f080003;
-        public static final int spinnerAlunos=0x7f080001;
-        public static final int spinnerTurmas=0x7f080012;
-        public static final int textViewDataAula=0x7f080015;
-        public static final int textViewLogin=0x7f08000a;
-        public static final int textViewNome=0x7f080005;
-        public static final int textViewSelecioneAluno=0x7f080000;
-        public static final int textViewSenha=0x7f08000e;
-        public static final int textViewTempoAula=0x7f080007;
-        public static final int textViewTipoUsuario=0x7f080004;
-        public static final int textViewTurma=0x7f080006;
-        public static final int textViewUsuario=0x7f08000c;
+        public static final int ButtonConsultarTurma=0x7f080016;
+        public static final int action_settings=0x7f080019;
+        public static final int buttonEncerrarAula=0x7f08000b;
+        public static final int buttonIniciarAula=0x7f080015;
+        public static final int buttonLogar=0x7f080012;
+        public static final int editTextSenha=0x7f080011;
+        public static final int editTextUsuario=0x7f08000f;
+        public static final int imageView1=0x7f08000a;
+        public static final int imageViewAusentePresente=0x7f080018;
+        public static final int imageViewLogo=0x7f08000d;
+        public static final int imageViewProfessorAluno=0x7f080004;
+        public static final int imgButtonSair=0x7f080013;
+        public static final int listViewPresencas=0x7f080005;
+        public static final int listViewRelatorioAula=0x7f080001;
+        public static final int spinnerAlunos=0x7f080003;
+        public static final int spinnerTurmas=0x7f080014;
+        public static final int textView1=0x7f080000;
+        public static final int textViewDataAula=0x7f080017;
+        public static final int textViewLogin=0x7f08000c;
+        public static final int textViewNome=0x7f080007;
+        public static final int textViewSelecioneAluno=0x7f080002;
+        public static final int textViewSenha=0x7f080010;
+        public static final int textViewTempoAula=0x7f080009;
+        public static final int textViewTipoUsuario=0x7f080006;
+        public static final int textViewTurma=0x7f080008;
+        public static final int textViewUsuario=0x7f08000e;
     }
     public static final class layout {
-        public static final int activity_alterar_presencas=0x7f030000;
-        public static final int activity_aula=0x7f030001;
-        public static final int activity_login=0x7f030002;
-        public static final int activity_principal=0x7f030003;
-        public static final int linha_lista_presencas=0x7f030004;
+        public static final int activity_activity_relatorio_final_aula=0x7f030000;
+        public static final int activity_alterar_presencas=0x7f030001;
+        public static final int activity_aula=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_principal=0x7f030004;
+        public static final int linha_lista_presencas=0x7f030005;
     }
     public static final class menu {
         public static final int activity_alterar_presencas=0x7f070000;
@@ -84,6 +87,7 @@ public final class R {
         public static final int text_logar=0x7f050006;
         public static final int text_logo=0x7f050003;
         public static final int text_nome=0x7f05000a;
+        public static final int text_percentagem_presencas=0x7f050015;
         public static final int text_selecione_aluno=0x7f050012;
         public static final int text_senha=0x7f050005;
         public static final int text_tempo_aula=0x7f05000c;
@@ -93,6 +97,7 @@ public final class R {
         public static final int title_activity_activity_alterar_presencas=0x7f050011;
         public static final int title_activity_activity_aula=0x7f05000e;
         public static final int title_activity_activity_principal=0x7f050009;
+        public static final int title_activity_activity_relatorio_final_aula=0x7f050014;
     }
     public static final class style {
         /** 

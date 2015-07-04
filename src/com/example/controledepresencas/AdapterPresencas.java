@@ -29,10 +29,8 @@ public class AdapterPresencas extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		// aqui tem que devolver o total de entradas da lista
 		// o tamanho do vetor de presencas
-
 		return datas.size();
 	}
 
@@ -55,7 +53,7 @@ public class AdapterPresencas extends BaseAdapter {
 
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			layout = inflater.inflate(R.layout.linha_lista_presencas, null);
+			layout = inflater.inflate(R.layout.linha_lista_presencas, parent);
 		} else {
 			layout = convertView;
 		}

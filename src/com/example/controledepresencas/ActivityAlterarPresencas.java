@@ -26,7 +26,6 @@ public class ActivityAlterarPresencas extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alterar_presencas);
-
 		listarAlunos();
 	}
 
@@ -35,7 +34,7 @@ public class ActivityAlterarPresencas extends Activity {
 		// aqui vai a chamada rest para listar todos os nomesAlunos de uma
 		// determinada turma...
 
-		nomesAlunos = new String[] { "Alan", "Pedro", "Jefferson", "Jo�o", "Fulano1", "Fulano2" };
+		nomesAlunos = new String[] { "Alan", "Pedro", "Jeferson", "Joao", "Fulano1", "Fulano2" };
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesAlunos);
 		Spinner listaAlunos = (Spinner) findViewById(R.id.spinnerAlunos);
 
@@ -72,6 +71,7 @@ public class ActivityAlterarPresencas extends Activity {
 		datas.add("04/07/2014");
 		datas.add("05/07/2014");
 		datas.add("06/07/2014");
+		datas.add("09/07/2014");
 
 		ListView lv = (ListView) findViewById(R.id.listViewPresencas);
 		lv.setAdapter(new AdapterPresencas(this, presencas, datas));
@@ -89,9 +89,7 @@ public class ActivityAlterarPresencas extends Activity {
 
 		    @Override
 		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 		    	showToastMessage("Longo click para alterar a presença");
-
 		    }
 
 		});
