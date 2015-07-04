@@ -165,4 +165,17 @@ public class ActivityAula extends Activity {
 			}
 		}, 0, timeOut);
 	}
+	
+	public void listarPresencasFinalAula(){
+		//Precisa passar o nome da turma também...
+		Bundle params = new Bundle();
+		params.putString("nome", this.userName);
+		params.putString("turmaID", this.turmaID);
+
+		Intent intent = new Intent(this, ActivityRelatorioFinalAula.class);
+		intent.putExtras(params);
+
+		startActivity(intent);	
+	}
+	
 }

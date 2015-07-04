@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:background="#4A83C9"
     android:orientation="vertical"
-    tools:context="com.example.controledepresencas.ActivityAlterarPresencas" >
-
+    tools:context="com.example.controledepresencas.ActivityRelatorioFinalAula" >
+<!-- Tem que ver porque nao está aparecendo o titulo... -->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -27,25 +27,7 @@
                 android:text="@string/text_nome_turma"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
-                android:textStyle="bold" />
-            
-            <TextView
-                android:id="@+id/textViewSelecioneAluno"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_selecione_aluno"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            
-			<Spinner
-	            android:id="@+id/spinnerAlunos"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_marginEnd="30dp"
-	            android:layout_marginStart="30dp"
-	            android:textColor="#FFFFFF" /> 
-                     
+                android:textStyle="bold" />            
         </LinearLayout>
 
         <LinearLayout
@@ -60,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/text_tipo_usuario"
-                android:src="@drawable/aluno" >
+                android:src="@drawable/lista_final_aula" >
             </ImageView>
         </LinearLayout>
     </LinearLayout>
@@ -89,3 +71,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

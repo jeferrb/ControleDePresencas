@@ -10,56 +10,46 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class AdapterPresencas extends BaseAdapter {
-
-	// precisamos implementar o contrutor aqui
-	// e passar o Array (String) com todos as presencas do aluno
-	// se necessario pdoe passar mais de um array nao tem problema
-	// no metodo getView vamos preencher com todas as presencas
-
+public class AdapterRelatorioFinalAula extends BaseAdapter {
 	private Context context;
 	private ArrayList<Boolean> presencas;
-	private ArrayList<String> datas;
-
-	public AdapterPresencas(Context context, ArrayList<Boolean> presencas, ArrayList<String> datas) {
+	private ArrayList<String> nomeAlunos;
+	
+	public AdapterRelatorioFinalAula(Context context, ArrayList<Boolean> presencas, ArrayList<String> nomeAlunos) {
 		this.context = context;
 		this.presencas = presencas;
-		this.datas = datas;
+		this.nomeAlunos = nomeAlunos;
+		
 	}
 
 	@Override
 	public int getCount() {
-		// aqui tem que devolver o total de entradas da lista
-		// o tamanho do vetor de presencas
-		return datas.size();
+		return nomeAlunos.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return datas.get(position);
+		return nomeAlunos.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
 		View layout;
 
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			layout = inflater.inflate(R.layout.linha_lista_presencas_aluno, parent);
+			layout = inflater.inflate(R.layout.linha_lista_presencas_final_aula, parent);
 		} else {
 			layout = convertView;
 		}
 
-		TextView dataAula = (TextView) layout.findViewById(R.id.textViewDataAula);
-		dataAula.setText(datas.get(position));
+		TextView nomeAluno = (TextView) layout.findViewById(R.id.textViewNomeAluno);
+		nomeAluno.setText(nomeAlunos.get(position));
 
 		ImageView imagePresenca = (ImageView) layout.findViewById(R.id.imageViewAusentePresente);
 
