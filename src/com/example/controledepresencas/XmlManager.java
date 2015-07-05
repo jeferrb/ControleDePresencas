@@ -318,7 +318,7 @@ false
 		return retorno;
 	}
 
-	public static ArrayList<String[]> manageXmlTurmas(String rawXml) {
+	public static ArrayList<ItemConsultaTurma> manageXmlTurmas(String rawXml) {
 		/*
 		 * return a array of classes with each [i] corresponding a each
 		 * discipline an j: 0 = idTurma; 1 = discipline name; 2 = opened or not
@@ -340,9 +340,11 @@ false
 		</turmaLogins>
 		 */
 
-		ArrayList<String[]> retorno = new ArrayList<String[]>();
+		ArrayList<ItemConsultaTurma> retorno = new ArrayList<ItemConsultaTurma>();
 
-		String[] current = new String[3];
+		//String[] current = new String[3];
+		ItemConsultaTurma itemConsultaTurma = new ItemConsultaTurma();
+		
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
 		String text = null;
@@ -364,15 +366,20 @@ false
 					break;
 				case XmlPullParser.END_TAG:
 					if (name.equals("chamadaAberta")) {
-						current[2] = text;
+						itemConsultaTurma.setChamadaAberta(Boolean.parseBoolean(text));
 					}
 					if (name.equals("idTurma")) {
-						current[0] = text;
+						itemConsultaTurma.setIdTurma(text);
 					}
 					if (name.equals("nomeDisciplina")) {
+<<<<<<< HEAD
 						current[1] = text;
 						retorno.add(current);
 						current = new String[3];
+=======
+						itemConsultaTurma.setNomeDisciplina(text);
+						retorno.add(itemConsultaTurma);
+>>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 					}
 					break;
 				}

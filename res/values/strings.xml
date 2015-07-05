@@ -21,7 +21,8 @@
     <string name="title_activity_activity_alterar_presencas">Alteração de Presenças</string>
     <string name="text_selecione_aluno">Selecione o Aluno</string>
     <string name="text_data">00/00/00</string>
-    <string name="title_activity_activity_relatorio_final_aula">ActivityRelatorioFinalAula</string>
+    <string name="title_activity_relatorio_final_aula">ActivityRelatorioFinalAula</string>
     <string name="text_percentagem_presencas">prescentagem</string>
+    <string name="text_nome_turma">Nome da Turma</string>
 
 </resources>

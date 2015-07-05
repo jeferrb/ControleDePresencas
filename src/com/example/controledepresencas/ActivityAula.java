@@ -178,7 +178,22 @@ public class ActivityAula extends Activity {
 		}, 0, timeOut);
 	}
 	
+<<<<<<< HEAD
 	public void finalizarChamada(){
 		//http://10.0.0.105:8080/CPresenca/api/	aula/turmaId/	1
 	}
+=======
+	public void listarPresencasFinalAula(){
+		//Precisa passar o nome da turma também...
+		Bundle params = new Bundle();
+		params.putString("nome", this.userName);
+		params.putString("turmaID", this.turmaID);
+
+		Intent intent = new Intent(this, ActivityRelatorioFinalAula.class);
+		intent.putExtras(params);
+
+		startActivity(intent);	
+	}
+	
+>>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 }

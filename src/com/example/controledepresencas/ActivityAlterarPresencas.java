@@ -80,6 +80,7 @@ public class ActivityAlterarPresencas extends Activity {
 		// Vai ser um onClickListener para o listview...
 
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				confirmaAlterarPresenca(position);
 				return true;
