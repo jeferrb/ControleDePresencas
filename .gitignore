@@ -31,3 +31,6 @@ proguard/
 
 # teste
 #src/com/unicamp/br/mo409/statemachines/
+
+# server Location
+src/com/example/controledepresencas/RestClient.java

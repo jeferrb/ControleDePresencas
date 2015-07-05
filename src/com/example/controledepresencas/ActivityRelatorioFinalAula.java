@@ -14,11 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 public class ActivityRelatorioFinalAula extends Activity {
-<<<<<<< HEAD
 	private ArrayList<String> nomesAlunos;
-=======
-	private ArrayList<Boolean> nomeAlunos;
->>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 	private ArrayList<Boolean> presencas;
 	private int idTurma;
 	@Override

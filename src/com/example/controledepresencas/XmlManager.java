@@ -372,14 +372,12 @@ false
 						itemConsultaTurma.setIdTurma(text);
 					}
 					if (name.equals("nomeDisciplina")) {
-<<<<<<< HEAD
-						current[1] = text;
+
+						/*current[1] = text;
 						retorno.add(current);
-						current = new String[3];
-=======
+						current = new String[3];*/
 						itemConsultaTurma.setNomeDisciplina(text);
 						retorno.add(itemConsultaTurma);
->>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 					}
 					break;
 				}

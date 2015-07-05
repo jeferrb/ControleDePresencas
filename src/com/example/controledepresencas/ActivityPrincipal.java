@@ -25,17 +25,16 @@ public class ActivityPrincipal extends Activity {
 	private final String TIPO_PROFESSOR = "Professor";
 	private final String TIPO_ALUNO = "Aluno";
 	private String userName, userType;
-<<<<<<< HEAD
-	private String[] nomesTurmas;
+
+/*	private String[] nomesTurmas;
 	private String[] IdTurmas;
 	private boolean[] isOpenTurmas;
+	*/
 	private Spinner listaTurmas;
-=======
 	private String[] nomesDisciplinasTurmas;
 	/*private String[] IdTurmas;
 	private boolean[] isOpenTurmas;*/
 	private ArrayList<ItemConsultaTurma> ret;
->>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,15 +80,12 @@ public class ActivityPrincipal extends Activity {
 	public void listarTurmas() {
 		// http://crunchify.com/how-to-iterate-through-java-list-4-way-to-iterate-through-loop/
 		String retorno = RestClient.doRequisition("aula/usuario/" + this.userName + "/tipo/" + this.userType);
-<<<<<<< HEAD
-		ArrayList<String[]> ret = XmlManager.manageXmlTurmas(retorno);
-		nomesTurmas = new String[ret.size()];
-=======
+		ArrayList<ItemConsultaTurma> ret = XmlManager.manageXmlTurmas(retorno);
+		//nomesTurmas = new String[ret.size()];
 		// String retorno = "";
 		this.ret = XmlManager.manageXmlTurmas(retorno);
 		
 		/*nomesDisciplinas = new String[ret.size()];
->>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 		IdTurmas = new String[ret.size()];
 		isOpenTurmas = new boolean[ret.size()];
 		for (int i = 0; i < ret.size(); i++) {
@@ -102,14 +98,10 @@ public class ActivityPrincipal extends Activity {
 		for(int i=0; i< this.ret.size(); i++){
 			 nomesDisciplinasTurmas[i] = this.ret.get(i).getNomeDisciplina() +"- Turma "+ this.ret.get(i).getIdTurma();
 		}
-<<<<<<< HEAD
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesTurmas);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesTurmas);
-=======
-		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesDisciplinasTurmas);
 		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
->>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 		listaTurmas.setAdapter(adapter);
 		listaTurmas.setOnItemSelectedListener(setBotoes(this.ret));
 		
@@ -224,7 +216,6 @@ public class ActivityPrincipal extends Activity {
 		askForLogout();
 	}
 
-<<<<<<< HEAD
 	public void onClickIniciarChamada(View v) {
 		String retorno = "";
 		if (userType.equals("Professor")) {
@@ -242,7 +233,7 @@ public class ActivityPrincipal extends Activity {
 				Log.e("latitude", Double.toString(latitude));
 				Log.e("longitude", Double.toString(longitude));
 				showToastMessage("Entrando em aula\nLat: " + latitude + "\nLong: " + longitude);
-				retorno = RestClient.doRequisition("aula/usuario/" + userName + "/turmaId/" + IdTurmas[listaTurmas.getSelectedItemPosition()] + "/posix/" + latitude+ "/posiy/" + longitude);
+				retorno = RestClient.doRequisition("aula/usuario/" + userName + "/turmaId/" + this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma() + "/posix/" + latitude+ "/posiy/" + longitude);
 				
 			} else {
 				// Can't get location.
@@ -251,7 +242,7 @@ public class ActivityPrincipal extends Activity {
 				gps.showSettingsAlert();
 			}
 		} else if (userType.equals("Aluno")) {
-			retorno = RestClient.doRequisition("aula/aluno/" + userName + "/turmaId/" + IdTurmas[listaTurmas.getSelectedItemPosition()]);
+			retorno = RestClient.doRequisition("aula/aluno/" + userName + "/turmaId/" + this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
 		}
 //TODO
 		//TODO
@@ -262,9 +253,12 @@ public class ActivityPrincipal extends Activity {
 				showToastMessage("Aula iniciada");
 				Bundle params = new Bundle();
 				params.putString("nome", this.userName);
-				params.putString("turmaID", IdTurmas[listaTurmas.getSelectedItemPosition()]);
+				params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
 				params.putString("tipo", this.userType);
 				params.putString("chamdaID", (this.userType.equals("Aluno") ? ret[1] : ""));
+				//Acho que precisa passar o nome da disciplina tambem...
+				//para exibir na outra activity
+				//->>>this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina();
 				Intent intent = new Intent(this, ActivityAula.class);
 				intent.putExtras(params);
 				startActivity(intent);
@@ -272,24 +266,6 @@ public class ActivityPrincipal extends Activity {
 				showPopUpMessage(ret[1]);
 			}
 		}
-=======
-	public void onClickIniciarAula(View v) {
-		// TODO
-		showToastMessage("Iniciando aula");
-		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
-
-		Bundle params = new Bundle();
-		params.putString("nome", this.userName);
-		params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
-		//Acho que precisa passar o nome da disciplina tambem...
-		//para exibir na outra activity
-		//->>>this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina();
-
-		Intent intent = new Intent(this, ActivityAula.class);
-		intent.putExtras(params);
-
-		startActivity(intent);
->>>>>>> 4ccb86a8e119571703d60fa604c45f359f475dda
 	}
 
 	public void onClickDeslogar(View v) {
@@ -297,15 +273,16 @@ public class ActivityPrincipal extends Activity {
 	}
 
 	public void onClickConsultarTurmas(View v) {
-		Bundle params = new Bundle();
-		params.putString("nome", this.userName);
-		params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
-		params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
-
-		Intent intent = new Intent(this, ActivityAlterarPresencas.class);
-		intent.putExtras(params);
-
-		startActivity(intent);
+		if(this.userType.equals("Professor")){
+			Bundle params = new Bundle();
+			params.putString("nome", this.userName);
+			params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
+			params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
+	
+			Intent intent = new Intent(this, ActivityAlterarPresencas.class);
+			intent.putExtras(params);
+			startActivity(intent);
+		}
 	}
 
 }
