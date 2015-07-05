@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,18 +19,21 @@ import android.widget.Toast;
 
 public class ActivityPrincipal extends Activity {
 
+	protected static final String TAG = "ActivityPrincipal";
 	private final String TIPO_PROFESSOR = "Professor";
 	private final String TIPO_ALUNO = "Aluno";
 	private String userName, userType;
 	private String[] nomesTurmas;
 	private String[] IdTurmas;
 	private boolean[] isOpenTurmas;
+	private Spinner listaTurmas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
 
+		listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
 		Intent intent = getIntent();
 		if (intent != null) {
 			Bundle params = intent.getExtras();
@@ -68,7 +72,6 @@ public class ActivityPrincipal extends Activity {
 	public void listarTurmas() {
 		// http://crunchify.com/how-to-iterate-through-java-list-4-way-to-iterate-through-loop/
 		String retorno = RestClient.doRequisition("aula/usuario/" + this.userName + "/tipo/" + this.userType);
-		// String retorno = "";
 		ArrayList<String[]> ret = XmlManager.manageXmlTurmas(retorno);
 		nomesTurmas = new String[ret.size()];
 		IdTurmas = new String[ret.size()];
@@ -80,7 +83,6 @@ public class ActivityPrincipal extends Activity {
 		}
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesTurmas);
-		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
 		listaTurmas.setAdapter(adapter);
 		listaTurmas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -99,6 +101,7 @@ public class ActivityPrincipal extends Activity {
 					}
 
 				} catch (Exception e) {
+					Log.e(TAG,"Exception onItemSelected listarTurmas");
 					butaoIniciarAula.setEnabled(false);
 					butaoConsultarTurma.setEnabled(false);
 				}
@@ -156,19 +159,53 @@ public class ActivityPrincipal extends Activity {
 		askForLogout();
 	}
 
-	public void onClickIniciarAula(View v) {
-		// TODO
-		showToastMessage("Iniciando aula");
-		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
-
-		Bundle params = new Bundle();
-		params.putString("nome", this.userName);
-		params.putString("turmaID", nomesTurmas[listaTurmas.getSelectedItemPosition()]);
-
-		Intent intent = new Intent(this, ActivityAula.class);
-		intent.putExtras(params);
-
-		startActivity(intent);
+	public void onClickIniciarChamada(View v) {
+		String retorno = "";
+		if (userType.equals("Professor")) {
+			// Iniciar chamada http://10.0.0.105:8080/CPresenca/api/aula/usuario/Eliane/turmaId/1/posix/1/posiy/1
+			// Check Aluno http://10.0.0.105:8080/CPresenca/api/ aula/aluno/Eliane/turmaId/1
+			GPSTracker gps = new GPSTracker(ActivityPrincipal.this);
+			double latitude = gps.getLatitude();
+			double longitude = gps.getLongitude();
+			// GPSTracker class & a class object
+			gps = new GPSTracker(this);
+			// Check if GPS enabled
+			if (gps.canGetLocation()) {
+				latitude = gps.getLatitude();
+				longitude = gps.getLongitude();
+				Log.e("latitude", Double.toString(latitude));
+				Log.e("longitude", Double.toString(longitude));
+				showToastMessage("Entrando em aula\nLat: " + latitude + "\nLong: " + longitude);
+				retorno = RestClient.doRequisition("aula/usuario/" + userName + "/turmaId/" + IdTurmas[listaTurmas.getSelectedItemPosition()] + "/posix/" + latitude+ "/posiy/" + longitude);
+				
+			} else {
+				// Can't get location.
+				// GPS or network is not enabled.
+				// Ask user to enable GPS/network in settings.
+				gps.showSettingsAlert();
+			}
+		} else if (userType.equals("Aluno")) {
+			retorno = RestClient.doRequisition("aula/aluno/" + userName + "/turmaId/" + IdTurmas[listaTurmas.getSelectedItemPosition()]);
+		}
+//TODO
+		//TODO
+		if (!retorno.equals("")) {
+			Log.e(TAG, retorno);
+			String ret[] = XmlManager.manageXmlInicairChamada(retorno);
+			if (ret[0].equals("true")) {
+				showToastMessage("Aula iniciada");
+				Bundle params = new Bundle();
+				params.putString("nome", this.userName);
+				params.putString("turmaID", IdTurmas[listaTurmas.getSelectedItemPosition()]);
+				params.putString("tipo", this.userType);
+				params.putString("chamdaID", (this.userType.equals("Aluno") ? ret[1] : ""));
+				Intent intent = new Intent(this, ActivityAula.class);
+				intent.putExtras(params);
+				startActivity(intent);
+			} else {
+				showPopUpMessage(ret[1]);
+			}
+		}
 	}
 
 	public void onClickDeslogar(View v) {
@@ -176,8 +213,6 @@ public class ActivityPrincipal extends Activity {
 	}
 
 	public void onClickConsultarTurmas(View v) {
-		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
-
 		Bundle params = new Bundle();
 		params.putString("nome", this.userName);
 		params.putString("turmaID", nomesTurmas[listaTurmas.getSelectedItemPosition()]);

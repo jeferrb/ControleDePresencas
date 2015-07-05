@@ -6,8 +6,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class ActivityRelatorioFinalAula extends Activity {
-	private ArrayList<Boolean> nomesAlunos;
+	private ArrayList<String> nomesAlunos;
 	private ArrayList<Boolean> presencas;
+	private int idTurma;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

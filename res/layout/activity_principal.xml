@@ -79,7 +79,7 @@
 	        android:layout_marginEnd="50dp"
 	        android:layout_marginStart="50dp"
 	        android:background="#3FB041"
-	        android:onClick="onClickIniciarAula"
+	        android:onClick="onClickIniciarChamada"
 	        android:text="@string/text_iniciar_aula"
 	        android:textColor="#FFFFFF"
 	        android:textStyle="bold"

@@ -31,7 +31,8 @@ public class XmlManager {
 		int event;
 		String text = null;
 		String[] retorno = new String[2];
-		retorno[0] = text_network_fail;
+		retorno[0] = "false";
+		retorno[1] = text_network_fail;
 		try {
 			InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
 			xmlFactoryObject = XmlPullParserFactory.newInstance();
@@ -51,7 +52,6 @@ public class XmlManager {
 				case XmlPullParser.END_TAG:
 					if (name.equals("sucess")) {
 						if (text.equals("false")) {
-							retorno[0] = "Usuário já conectado";
 							return retorno;
 						}
 					}
@@ -180,20 +180,97 @@ public class XmlManager {
 		return text_network_fail;
 	}
 
-	public static String manageXmlFinishClass(String rawXml) {
+	public static ArrayList<String[]> manageXmlFinalizarChamada(String rawXml) {
 		/*
-		 * return: 0 in case of fail 1 in case of success
+		 * retorna: retorno[0]= descrisção da falha
+		 * 
+		 * OU
+		 * 
+		 * um arraylist de: [nomeAluno, isFinalizada, isPresente]
 		 */
 
 		/*
-		 * input examples: <?xml version="1.0" encoding="UTF-8"
-		 * standalone="yes"?> <LoginUsuario> <sucess>true</sucess>
-		 * </LoginUsuario>
+		 * input examples: 
+		 * <finalizaChamadas>
+		 * <FinalizaAula>
+		 * <causa>Chamadacontinuaaberta</causa>
+		 * <isFinalizada>false</isFinalizada>
+		 * </FinalizaAula>
+		 * </finalizaChamadas>
 		 * 
-		 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-		 * <LoginUsuario> <sucess>false</sucess> <tipo>Chave errada</tipo>
-		 * </LoginUsuario>
+		 * 
+		 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+    <finalizaChamadas>
+
+        <FinalizaAula>
+
+            <Aluno>
+Lele
+            </Aluno>
+
+            <isFinalizada>
+true
+            </isFinalizada>
+
+            <isPresente>
+false
+            </isPresente>
+        </FinalizaAula>
+
+        <FinalizaAula>
+
+            <Aluno>
+Joao Luis
+            </Aluno>
+
+            <isFinalizada>
+true
+            </isFinalizada>
+
+            <isPresente>
+false
+            </isPresente>
+        </FinalizaAula>
+
+        <FinalizaAula>
+
+            <Aluno>
+Lala
+            </Aluno>
+
+            <isFinalizada>
+true
+            </isFinalizada>
+
+            <isPresente>
+false
+            </isPresente>
+        </FinalizaAula>
+
+        <FinalizaAula>
+
+            <Aluno>
+Lulu
+            </Aluno>
+
+            <isFinalizada>
+true
+            </isFinalizada>
+
+            <isPresente>
+false
+            </isPresente>
+        </FinalizaAula>
+    </finalizaChamadas>
+
+		 
+		 
+		 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?><finalizaChamadas><FinalizaAula><Aluno>Lele</Aluno><isFinalizada>true</isFinalizada><isPresente>false</isPresente></FinalizaAula><FinalizaAula><Aluno>Joao Luis</Aluno><isFinalizada>true</isFinalizada><isPresente>false</isPresente></FinalizaAula><FinalizaAula><Aluno>Lala</Aluno><isFinalizada>true</isFinalizada><isPresente>false</isPresente></FinalizaAula><FinalizaAula><Aluno>Lulu</Aluno><isFinalizada>true</isFinalizada><isPresente>false</isPresente></FinalizaAula></finalizaChamadas>
 		 */
+		
+		ArrayList<String[]> retorno = new ArrayList<String[]>();
+		String[] current = new String[3];
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
 		String text = null;
@@ -214,11 +291,22 @@ public class XmlManager {
 					text = myParser.getText();
 					break;
 				case XmlPullParser.END_TAG:
-					if (name.equals("sucess")) {
-						if (text.equals("true")) {
-							return "Sucesso";
-						} else
-							return text;
+					if (name.equals("causa")) {
+						current = new String[1];
+						current[0] = text;
+						retorno.add(current);
+						return retorno;
+					}
+					if (name.equals("Aluno")) {
+						current[0] = text;
+					}
+					if (name.equals("isFinalizada")) {
+						current[1] = text;
+					}
+					if (name.equals("isPresente")) {
+						current[2] = text;
+						retorno.add(current);
+						current = new String[3];
 					}
 					break;
 				}
@@ -227,7 +315,7 @@ public class XmlManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "Falha desconhecida";
+		return retorno;
 	}
 
 	public static ArrayList<String[]> manageXmlTurmas(String rawXml) {
@@ -237,10 +325,19 @@ public class XmlManager {
 		 */
 
 		/*
-		 * input example: <turmaLogins> <LoginTurma>
-		 * <chamadaAberta>false</chamadaAberta> <idTurma>1</idTurma>
-		 * <nomeDisciplina>Engenharia de software</nomeDisciplina> </LoginTurma>
-		 * </turmaLogins>
+		 * input example:
+		<turmaLogins>
+		<LoginTurma>
+		<chamadaAberta>false</chamadaAberta>
+		<idTurma>1</idTurma>
+		<nomeDisciplina>Engenharia de software</nomeDisciplina>
+		</LoginTurma>
+		<LoginTurma>
+		<chamadaAberta>false</chamadaAberta>
+		<idTurma>2</idTurma>
+		<nomeDisciplina>test</nomeDisciplina>
+		</LoginTurma>
+		</turmaLogins>
 		 */
 
 		ArrayList<String[]> retorno = new ArrayList<String[]>();
@@ -275,6 +372,7 @@ public class XmlManager {
 					if (name.equals("nomeDisciplina")) {
 						current[1] = text;
 						retorno.add(current);
+						current = new String[3];
 					}
 					break;
 				}
@@ -287,6 +385,62 @@ public class XmlManager {
 		return retorno;
 	}
 
+	public static String[] manageXmlInicairChamada(String rawXml) {
+		// TODO
+
+		/*
+		 * input example:
+		 * 
+		 * <InicializaAula> <isInicializada>true</isInicializada>
+		 * </InicializaAula>
+		 * 
+		 *  OU
+		 *  
+<InicializaAula>
+<chamdaID>29</chamdaID>
+<isInicializada>true</isInicializada>
+</InicializaAula>
+		 */
+		XmlPullParserFactory xmlFactoryObject;
+		int event;
+		String text = null;
+		String[] retorno = new String[2];
+		try {
+			InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
+			xmlFactoryObject = XmlPullParserFactory.newInstance();
+			XmlPullParser myParser = xmlFactoryObject.newPullParser();
+
+			myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			myParser.setInput(stream, null);
+			event = myParser.getEventType();
+			while (event != XmlPullParser.END_DOCUMENT) {
+				String name = myParser.getName();
+				switch (event) {
+				case XmlPullParser.START_TAG:
+					break;
+				case XmlPullParser.TEXT:
+					text = myParser.getText();
+					break;
+				case XmlPullParser.END_TAG:
+					if (name.equals("isInicializada")) {
+						retorno[0]=text;
+						return retorno;
+					}
+					if (name.equals("causa")||name.equals("chamdaID")) {
+						retorno[0] = "Falha";
+						retorno[1] = text;
+						return retorno;
+					}
+					break;
+				}
+				event = myParser.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		retorno[1] = text_network_fail;
+		return retorno;
+	}
 	public static String manageXmlCheckIn(String rawXml) {
 		// TODO
 
@@ -333,7 +487,6 @@ public class XmlManager {
 		}
 		return text_network_fail;
 	}
-
 	public static String manageXmlCheckOut(String rawXml) {
 		// TODO
 
@@ -385,6 +538,58 @@ public class XmlManager {
 			e.printStackTrace();
 		}
 		return "Falha de rede!";
+	}
+
+	
+	public static String manageXmlCheckOutAluno(String rawXml) {
+		
+		/*
+		 * 
+		
+		
+		
+		
+		*/
+		XmlPullParserFactory xmlFactoryObject;
+		int event;
+		String text = null;
+		try {
+			InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
+			xmlFactoryObject = XmlPullParserFactory.newInstance();
+			XmlPullParser myParser = xmlFactoryObject.newPullParser();
+
+			myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			myParser.setInput(stream, null);
+			event = myParser.getEventType();
+			while (event != XmlPullParser.END_DOCUMENT) {
+				String name = myParser.getName();
+				switch (event) {
+				case XmlPullParser.START_TAG:
+					break;
+				case XmlPullParser.TEXT:
+					text = myParser.getText();
+					break;
+				case XmlPullParser.END_TAG:
+					/*if (name.equals("chamadaAberta")) {
+						current[2] = text;
+					}
+					if (name.equals("idTurma")) {
+						current[0] = text;
+					}
+					if (name.equals("nomeDisciplina")) {
+						current[1] = text;
+						retorno.add(current);
+						current = new String[3];
+					}*/
+					break;
+				}
+				event = myParser.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// TODO
+		return "";
 	}
 
 }

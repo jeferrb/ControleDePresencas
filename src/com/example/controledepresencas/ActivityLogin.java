@@ -26,15 +26,15 @@ public class ActivityLogin extends Activity {
 		}
 		
 		//return success, fail or the type of the userName.
+		RestClient.doRequisition("login/usuario/" + login + "/tipo/Aluno");
+		RestClient.doRequisition("login/usuario/" + login + "/tipo/Professor");
 		String retorno = RestClient.doRequisition("login/usuario/" + login + "/senha/" + senha);
 		String[] ret = XmlManager.manageXmlLogin(retorno);
 		
-		String resultado = ret[0];
-		
-		if (resultado.equals("Aluno")||resultado.equals("Professor")) {
+		if (ret[0].equals("Aluno")||ret[0].equals("Professor")) {
 			Bundle params = new Bundle ();
 			params.putString("nome", login);
-			params.putString("tipo", resultado);
+			params.putString("tipo", ret[0]);
 			
 			Intent intent = new Intent(this, ActivityPrincipal.class);
 			intent.putExtras(params);
@@ -42,7 +42,7 @@ public class ActivityLogin extends Activity {
 			startActivity(intent);
 			finish();
 		}else{
-			this.showPopUpMessage(resultado);
+			this.showPopUpMessage(ret[1]);
 		}
 	}
 	

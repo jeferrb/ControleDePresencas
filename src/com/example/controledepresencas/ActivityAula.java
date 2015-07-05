@@ -1,5 +1,6 @@
 package com.example.controledepresencas;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,7 +20,7 @@ import android.widget.Toast;
 public class ActivityAula extends Activity {
 	private final String TIPO_PROFESSOR = "Professor";
 	private final String TIPO_ALUNO = "Aluno";
-	private String turmaID, userName, userType;
+	private String turmaID, userName, userType, chamdaID;
 
 	private long timeOut = 100;// milliseconds
 	private Timer myTimer;
@@ -37,10 +38,14 @@ public class ActivityAula extends Activity {
 				this.turmaID = params.getString("turmaID");
 				this.userName = params.getString("nome");
 				this.userType = params.getString("tipo");
+				this.chamdaID = params.getString("chamdaID");
 				showToastMessage("ID da turma: " + turmaID);
 			}
 		}
 		ajustarTela();
+		if(userType.equals("Aluno")){
+			//TODO sendtick
+		}
 	}
 
 	public void ajustarTela() {
@@ -77,18 +82,25 @@ public class ActivityAula extends Activity {
 	}
 
 	private void enviarSolicitacaoEncerrarAula() {
-		String retorno = "";
 		if (userType.equals("Professor")) {
-			retorno = RestClient.doRequisition("aula/turmaid/" + turmaID);
+			ArrayList<String[]> retorno = new ArrayList<String[]>();
+			String retorno01 = RestClient.doRequisition("aula/turmaId/" + turmaID);
+			retorno = XmlManager.manageXmlFinalizarChamada(retorno01);
+			if (retorno.get(0).length==1) {
+				showPopUpMessage(retorno.get(0)[0]);
+			} else {
+				//TODO passar o arraylista para a tela do Pedro
+			}
 		} else if (userType.equals("Aluno")) {
-			retorno = RestClient.doRequisition("aula/aluno/" + userName);
-		}
-		retorno = XmlManager.manageXmlFinishClass(retorno);
-		// TODO
-		if (retorno.equals("Sucesso")) {
-			finish();
-		} else {
-			showPopUpMessage(retorno);
+			String retorno = "";
+			retorno = RestClient.doRequisition("aula/aluno/" + userName + this.chamdaID);
+			retorno = XmlManager.manageXmlCheckOutAluno(retorno);
+			// TODO create manageXmlCheckOutAluno
+			if (retorno.equals("Sucesso")) {
+				finish();
+			} else {
+				showPopUpMessage(retorno);
+			}
 		}
 	}
 
@@ -164,5 +176,9 @@ public class ActivityAula extends Activity {
 				}
 			}
 		}, 0, timeOut);
+	}
+	
+	public void finalizarChamada(){
+		//http://10.0.0.105:8080/CPresenca/api/	aula/turmaId/	1
 	}
 }
