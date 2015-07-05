@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,18 +16,35 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ActivityAlterarPresencas extends Activity {
-	private Boolean[] presencas;
+public class ActivityProfConsAlunoTurma extends Activity {
+	/*private Boolean[] presencas;
 	private String[] datas;
 	private String[] nomesAlunos;
 	private int[] idAlunos;
-	private int currentPosition = 0;
-
+	private int currentPosition = 0;*/
+	private String userName;
+	private String userType;
+	private String nomeDisciplina;
+	private String idTurma;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_alterar_presencas);
-		listarAlunos();
+		setContentView(R.layout.activity_prof_cons_aluno_turma);
+		
+		Intent intent = getIntent();
+		if (intent != null) {
+			Bundle params = intent.getExtras();
+			if (params != null) {
+				this.idTurma = params.getString("turmaID");
+				this.nomeDisciplina = params.getString("nomeDisciplina");
+				showToastMessage("TurmaID: " + this.idTurma + "\n" + "Disciplina: " + this.nomeDisciplina);
+			}
+		}
+		//listarAlunos();
+		//ajustarTela();
+		//listarTurmas();
+		
+		
 	}
 
 	public void listarAlunos() {
@@ -34,11 +52,11 @@ public class ActivityAlterarPresencas extends Activity {
 		// aqui vai a chamada rest para listar todos os nomesAlunos de uma
 		// determinada turma...
 
-		nomesAlunos = new String[] { "Alan", "Pedro", "Jeferson", "Joao", "Fulano1", "Fulano2" };
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesAlunos);
+		//nomesAlunos = new String[] { "Alan", "Pedro", "Jeferson", "Joao", "Fulano1", "Fulano2" };
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesAlunos);
 		Spinner listaAlunos = (Spinner) findViewById(R.id.spinnerAlunos);
 
-		listaAlunos.setAdapter(adapter);
+		//listaAlunos.setAdapter(adapter);
 
 		// Aqui vai o evento de click que vai atualizar o listview
 		// com as datas e presencas dos nomesAlunos
@@ -100,7 +118,7 @@ public class ActivityAlterarPresencas extends Activity {
 		//TODO rest alterar
 		//TODO Pedrir confirmação e enviar alteração
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		currentPosition = position;
+		//currentPosition = position;
 		builder.setMessage("Tem certeza que desaja alterar a presença de "/* TODO + nomesAlunos[position]*/).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {

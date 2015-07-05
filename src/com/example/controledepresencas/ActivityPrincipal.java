@@ -244,11 +244,10 @@ public class ActivityPrincipal extends Activity {
 	public void onClickConsultarTurmas(View v) {
 		if(this.userType.equals("Professor")){
 			Bundle params = new Bundle();
-			params.putString("nome", this.userName);
 			params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
 			params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
 	
-			Intent intent = new Intent(this, ActivityAlterarPresencas.class);
+			Intent intent = new Intent(this, ActivityProfConsAlunoTurma.class);
 			intent.putExtras(params);
 			startActivity(intent);
 		}

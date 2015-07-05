@@ -38,6 +38,7 @@
         </activity>
         <activity
             android:name=".ActivityAlterarPresencas"
+            android:name=".ActivityProfConsAlunoTurma"
             android:label="@string/title_activity_activity_alterar_presencas"
             android:screenOrientation="portrait" >
         </activity>
