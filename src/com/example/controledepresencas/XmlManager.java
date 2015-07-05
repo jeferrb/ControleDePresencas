@@ -377,7 +377,6 @@ false
 						retorno.add(current);
 						current = new String[3];*/
 						itemConsultaTurma.setNomeDisciplina(text);
-						Log.e(TAG, "passouAqui");
 						retorno.add(new ItemConsultaTurma(itemConsultaTurma.isChamadaAberta(), itemConsultaTurma.getNomeDisciplina(), itemConsultaTurma.getIdTurma()));
 					}
 					break;
