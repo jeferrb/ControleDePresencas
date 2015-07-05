@@ -341,8 +341,6 @@ false
 		 */
 
 		ArrayList<ItemConsultaTurma> retorno = new ArrayList<ItemConsultaTurma>();
-
-		//String[] current = new String[3];
 		ItemConsultaTurma itemConsultaTurma = new ItemConsultaTurma();
 		
 		XmlPullParserFactory xmlFactoryObject;
@@ -372,10 +370,6 @@ false
 						itemConsultaTurma.setIdTurma(text);
 					}
 					if (name.equals("nomeDisciplina")) {
-
-						/*current[1] = text;
-						retorno.add(current);
-						current = new String[3];*/
 						itemConsultaTurma.setNomeDisciplina(text);
 						retorno.add(new ItemConsultaTurma(itemConsultaTurma.isChamadaAberta(), itemConsultaTurma.getNomeDisciplina(), itemConsultaTurma.getIdTurma()));
 					}
@@ -386,13 +380,10 @@ false
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// TODO
 		return retorno;
 	}
 
 	public static String[] manageXmlInicairChamada(String rawXml) {
-		// TODO
-
 		/*
 		 * input example:
 		 * 
@@ -431,8 +422,13 @@ false
 						retorno[0]=text;
 						return retorno;
 					}
-					if (name.equals("causa")||name.equals("chamdaID")) {
+					if (name.equals("causa")) {
 						retorno[0] = "Falha";
+						retorno[1] = text;
+						return retorno;
+					}
+					if (name.equals("chamdaID")) {
+						retorno[0] = "true";
 						retorno[1] = text;
 						return retorno;
 					}
@@ -447,8 +443,6 @@ false
 		return retorno;
 	}
 	public static String manageXmlCheckIn(String rawXml) {
-		// TODO
-
 		/*
 		 * input example:
 		 * 
@@ -493,8 +487,6 @@ false
 		return text_network_fail;
 	}
 	public static String manageXmlCheckOut(String rawXml) {
-		// TODO
-
 		/*
 		 * input examples:
 		 * 

@@ -94,7 +94,7 @@ public class ActivityAula extends Activity {
 			}
 		} else if (userType.equals("Aluno")) {
 			String retorno = "";
-			retorno = RestClient.doRequisition("aula/aluno/" + userName + this.chamdaID);
+			retorno = RestClient.doRequisition("aula/aluno/" + userName +"/chamada/"+ this.chamdaID);
 			retorno = XmlManager.manageXmlCheckOutAluno(retorno);
 			// TODO create manageXmlCheckOutAluno
 			if (retorno.equals("Sucesso")) {
