@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -70,6 +71,16 @@ public class ActivityPrincipal extends Activity {
 			textView.setText(TIPO_PROFESSOR);
 
 		} else {
+			TextView texto = (TextView) findViewById(R.id.textViewTempoTick);
+			TextView texto2 = (TextView) findViewById(R.id.textViewPorcValAula);
+			EditText texto3 = (EditText) findViewById(R.id.editTextTempoTick);
+			EditText texto4 = (EditText) findViewById(R.id.editTextPorcValAula);
+			texto.setVisibility(View.INVISIBLE);
+			texto2.setVisibility(View.INVISIBLE);
+			texto3.setVisibility(View.INVISIBLE);
+			texto4.setVisibility(View.INVISIBLE);
+			
+			
 			textView.setText(TIPO_ALUNO);
 			imgView.setImageResource(R.drawable.aluno);
 		}

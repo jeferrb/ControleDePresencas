@@ -34,3 +34,4 @@ proguard/
 
 # server Location
 src/com/example/controledepresencas/RestClient.java
+AndroidManifest.xml
