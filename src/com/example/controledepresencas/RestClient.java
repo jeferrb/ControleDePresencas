@@ -25,7 +25,7 @@ public class RestClient extends AsyncTask<String, String, String> {
 	private static String TAG = "RestClient";
     private  String messageReceived = null;
 
-    private static String DIRECCION_GET  = "http://10.0.0.105:8080/CPresenca/api/";
+    private static String DIRECCION_GET  = "http://192.168.2.105:8080/CPresenca/api/";
     private static String DIRECCION_POST = DIRECCION_GET;
 
     @Override

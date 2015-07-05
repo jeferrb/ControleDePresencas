@@ -230,7 +230,7 @@ public class XmlManager {
 		return "Falha desconhecida";
 	}
 
-	public static ArrayList<String[]> manageXmlTurmas(String rawXml) {
+	public static ArrayList<ItemConsultaTurma> manageXmlTurmas(String rawXml) {
 		/*
 		 * return a array of classes with each [i] corresponding a each
 		 * discipline an j: 0 = idTurma; 1 = discipline name; 2 = opened or not
@@ -243,9 +243,11 @@ public class XmlManager {
 		 * </turmaLogins>
 		 */
 
-		ArrayList<String[]> retorno = new ArrayList<String[]>();
+		ArrayList<ItemConsultaTurma> retorno = new ArrayList<ItemConsultaTurma>();
 
-		String[] current = new String[3];
+		//String[] current = new String[3];
+		ItemConsultaTurma itemConsultaTurma = new ItemConsultaTurma();
+		
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
 		String text = null;
@@ -267,14 +269,14 @@ public class XmlManager {
 					break;
 				case XmlPullParser.END_TAG:
 					if (name.equals("chamadaAberta")) {
-						current[2] = text;
+						itemConsultaTurma.setChamadaAberta(Boolean.parseBoolean(text));
 					}
 					if (name.equals("idTurma")) {
-						current[0] = text;
+						itemConsultaTurma.setIdTurma(text);
 					}
 					if (name.equals("nomeDisciplina")) {
-						current[1] = text;
-						retorno.add(current);
+						itemConsultaTurma.setNomeDisciplina(text);
+						retorno.add(itemConsultaTurma);
 					}
 					break;
 				}
