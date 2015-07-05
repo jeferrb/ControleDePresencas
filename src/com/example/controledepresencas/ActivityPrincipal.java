@@ -101,39 +101,10 @@ public class ActivityPrincipal extends Activity {
 		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesTurmas);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesDisciplinasTurmas);
-		Spinner listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
+		listaTurmas = (Spinner) findViewById(R.id.spinnerTurmas);
 		listaTurmas.setAdapter(adapter);
 		listaTurmas.setOnItemSelectedListener(setBotoes(this.ret));
 		
-		//new AdapterView.OnItemSelectedListener() {
-			/*@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				Button butaoIniciarAula = (Button) findViewById(R.id.buttonIniciarAula);
-				Button butaoConsultarTurma = (Button) findViewById(R.id.ButtonConsultarTurma);
-				try {// may occur a fail or there are no classes registered
-					if (userType.equals("Aluno")) {
-						//butaoIniciarAula.setEnabled(isOpenTurmas[position]);
-						butaoIniciarAula.setEnabled(nom);
-						butaoConsultarTurma.setEnabled(isOpenTurmas[position]);
-					} else if (userType.equals("Professor")) {
-						butaoIniciarAula.setText("Abrir Aula");
-						butaoIniciarAula.setEnabled(!isOpenTurmas[position]);
-						butaoConsultarTurma.setEnabled(isOpenTurmas[position]);
-					}
-
-				} catch (Exception e) {
-					Log.e(TAG,"Exception onItemSelected listarTurmas");
-					butaoIniciarAula.setEnabled(false);
-					butaoConsultarTurma.setEnabled(false);
-				}
-
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// Do nothing
-			}
-		});*/
 	}
 	
 	public OnItemSelectedListener setBotoes(final ArrayList<ItemConsultaTurma> ret){
@@ -256,9 +227,7 @@ public class ActivityPrincipal extends Activity {
 				params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
 				params.putString("tipo", this.userType);
 				params.putString("chamdaID", (this.userType.equals("Aluno") ? ret[1] : ""));
-				//Acho que precisa passar o nome da disciplina tambem...
-				//para exibir na outra activity
-				//->>>this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina();
+				params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
 				Intent intent = new Intent(this, ActivityAula.class);
 				intent.putExtras(params);
 				startActivity(intent);

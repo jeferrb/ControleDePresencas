@@ -20,7 +20,7 @@ import android.widget.Toast;
 public class ActivityAula extends Activity {
 	private final String TIPO_PROFESSOR = "Professor";
 	private final String TIPO_ALUNO = "Aluno";
-	private String turmaID, userName, userType, chamdaID;
+	private String turmaID, userName, userType, chamdaID, nomeDisciplina;
 
 	private long timeOut = 100;// milliseconds
 	private Timer myTimer;
@@ -39,6 +39,7 @@ public class ActivityAula extends Activity {
 				this.userName = params.getString("nome");
 				this.userType = params.getString("tipo");
 				this.chamdaID = params.getString("chamdaID");
+				this.nomeDisciplina = params.getString("nomeDisciplina");
 				showToastMessage("ID da turma: " + turmaID);
 			}
 		}
