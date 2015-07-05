@@ -80,7 +80,7 @@ public class ActivityPrincipal extends Activity {
 	public void listarTurmas() {
 		// http://crunchify.com/how-to-iterate-through-java-list-4-way-to-iterate-through-loop/
 		String retorno = RestClient.doRequisition("aula/usuario/" + this.userName + "/tipo/" + this.userType);
-		ArrayList<ItemConsultaTurma> ret = XmlManager.manageXmlTurmas(retorno);
+		//ArrayList<ItemConsultaTurma> ret = XmlManager.manageXmlTurmas(retorno);
 		//nomesTurmas = new String[ret.size()];
 		// String retorno = "";
 		this.ret = XmlManager.manageXmlTurmas(retorno);

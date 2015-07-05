@@ -24,5 +24,13 @@
     <string name="title_activity_relatorio_final_aula">ActivityRelatorioFinalAula</string>
     <string name="text_percentagem_presencas">prescentagem</string>
     <string name="text_nome_turma">Nome da Turma</string>
+    <string name="text_tempo_tick">Tempo de Ticks</string>
+    <string name="text_porc_val_aula">Porc. Presenca (%)</string>
+    <!-- Tempo do Tick em minutos... -->
+    <string name="text_default_tempo_tick">10</string>
+    <!-- Porcentagem de Validação da Aula... -->
+	<string name="text_default_porc_val_aula">10</string>
+    
+    
 
 </resources>

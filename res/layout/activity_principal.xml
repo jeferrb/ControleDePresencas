@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_tipo_usuario"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
             
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_nome"
                 android:textColor="#FFFFFF"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />            
         </LinearLayout>
 
@@ -63,41 +63,99 @@
         android:gravity="center|top"
         android:orientation="vertical"
         android:layout_weight="6" >
-
-        <Spinner
-            android:id="@+id/spinnerTurmas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_marginStart="30dp"
-            android:textColor="#FFFFFF" />
-        
-        <Button
-	        android:id="@+id/buttonIniciarAula"
+		
+        <LinearLayout
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_marginEnd="50dp"
-	        android:layout_marginStart="50dp"
-	        android:background="#3FB041"
-	        android:onClick="onClickIniciarChamada"
-	        android:text="@string/text_iniciar_aula"
-	        android:textColor="#FFFFFF"
-	        android:textStyle="bold"
-	        android:layout_marginTop="20dp" />
-
-        <Button
-            android:id="@+id/ButtonConsultarTurma"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:background="#3FB041"
-            android:onClick="onClickConsultarTurmas"
-            android:text="@string/text_consultar_turma"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
+	        android:gravity="center|top"
+	        android:orientation="vertical">
+           
+            
+	        <Spinner
+	            android:id="@+id/spinnerTurmas"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginEnd="30dp"
+	            android:layout_marginStart="30dp"
+	            android:textColor="#FFFFFF" />
+			 <LinearLayout
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:orientation="horizontal"
+		        >
+			        <TextView
+			            android:id="@+id/textViewTempoTick"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="@string/text_tempo_tick"
+			            android:textSize="12sp"
+			            android:textColor="#FFFFFF"
+			            android:textStyle="bold" />
+		
+			        <EditText
+			            android:id="@+id/editTextTempoTick"
+			            android:layout_width="30dp"
+			            android:layout_height="wrap_content"
+			            android:background="#FFFFFF"
+			            android:inputType="number"
+			            android:layout_marginStart="5dp"
+			            android:text="@string/text_default_tempo_tick"
+			            android:textSize="12sp" />
+			        <TextView
+			            android:id="@+id/textViewPorcValAula"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="@string/text_porc_val_aula"
+			            android:textSize="12sp"
+			            android:layout_marginStart="5dp"
+			            android:textColor="#FFFFFF"
+			            android:textStyle="bold" />
+		
+			        <EditText
+			            android:id="@+id/editTextPorcValAula"
+			            android:layout_width="30dp"
+			            android:layout_height="wrap_content"
+			            android:layout_marginStart="5dp"
+			            android:background="#FFFFFF"
+			            android:inputType="number"
+			            android:text="@string/text_default_porc_val_aula"
+			            android:textSize="12sp" />
+        	</LinearLayout>
+       </LinearLayout>
+	        
+	        <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center|top"
+	        android:orientation="vertical">
+            
+	        <Button
+		        android:id="@+id/buttonIniciarAula"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginEnd="50dp"
+		        android:layout_marginStart="50dp"
+		        android:background="#3FB041"
+		        android:onClick="onClickIniciarChamada"
+		        android:text="@string/text_iniciar_aula"
+		        android:textColor="#FFFFFF"
+		        android:textStyle="bold"
+		        android:layout_marginTop="20dp" />
+	
+	        <Button
+	            android:id="@+id/ButtonConsultarTurma"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginEnd="50dp"
+	            android:layout_marginStart="50dp"
+	            android:layout_marginTop="20dp"
+	            android:background="#3FB041"
+	            android:onClick="onClickConsultarTurmas"
+	            android:text="@string/text_consultar_turma"
+	            android:textColor="#FFFFFF"
+	            android:textStyle="bold" />
+		</LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
