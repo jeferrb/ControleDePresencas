@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import com.example.controledepresencas.model.ItemAlunoTurma;
 import com.example.controledepresencas.model.ItemConsultaTurma;
 import com.example.controledepresencas.model.ItemPresencaAlunoTurma;
 
@@ -597,6 +598,8 @@ false
 		ItemPresencaAlunoTurma itemPresAlunoTurma = new ItemPresencaAlunoTurma();
 		ArrayList<ItemPresencaAlunoTurma> retorno = new ArrayList<ItemPresencaAlunoTurma>();
 		
+		Log.i("XMLManager --> XML CRU",rawXml+"\n\n");
+		
 		
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
@@ -621,8 +624,9 @@ false
 						itemPresAlunoTurma.setDataChamada(text);
 					}
 					if (name.equals("isPresente")) {
+						//Log.i("XMLManager --> boolean XML",text);
 						itemPresAlunoTurma.setPresente(Boolean.parseBoolean(text));
-						Log.i("XMLManager --> item", itemPresAlunoTurma.getDataChamada());
+						//Log.i("XMLManager --> item", itemPresAlunoTurma.getDataChamada()+ "-"+ String.valueOf(itemPresAlunoTurma.isPresente()));
 						retorno.add(new ItemPresencaAlunoTurma(itemPresAlunoTurma.getDataChamada(), itemPresAlunoTurma.isPresente()));
 					}
 					break;
@@ -633,8 +637,62 @@ false
 			e.printStackTrace();
 		}
 		
-		Log.i("XMLManager", retorno.toString());
+		for(int i=0; i< retorno.size(); i++){
+			//Log.i("XMLManager->ArrayList", retorno.get(i).getDataChamada() +" - "+  String.valueOf(retorno.get(i).isPresente()));
+		}
+		return retorno;
+	}
+
+	
+public static ArrayList<ItemAlunoTurma>  manageXmlAlunoTurma(String rawXml){
 		
+		ItemAlunoTurma itemAlunoTurma = new ItemAlunoTurma();
+		ArrayList<ItemAlunoTurma> retorno = new ArrayList<ItemAlunoTurma>();
+		
+		Log.i("XMLManager --> XML CRU",rawXml+"\n\n");
+		
+		
+		XmlPullParserFactory xmlFactoryObject;
+		int event;
+		String text = null;
+		try {
+			InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
+			xmlFactoryObject = XmlPullParserFactory.newInstance();
+			XmlPullParser myParser = xmlFactoryObject.newPullParser();
+			myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			myParser.setInput(stream, null);
+			event = myParser.getEventType();
+			while (event != XmlPullParser.END_DOCUMENT) {
+				String name = myParser.getName();
+				switch (event) {
+				case XmlPullParser.START_TAG:
+					break;
+				case XmlPullParser.TEXT:
+					text = myParser.getText();
+					break;
+				case XmlPullParser.END_TAG:
+					if (name.equals("id")) {
+						itemAlunoTurma.setIdAluno(text);
+					}
+					if (name.equals("nome")) {
+						itemAlunoTurma.setNomeAluno(text);
+					}
+					if (name.equals("usuario")) {
+						itemAlunoTurma.setUsuarioAluno(text);
+						Log.i("XMLManager --> item", itemAlunoTurma.getIdAluno()+ " - "+ itemAlunoTurma.getNomeAluno()+" - "+itemAlunoTurma.getUsuarioAluno());
+						retorno.add(new ItemAlunoTurma(itemAlunoTurma.getIdAluno(), itemAlunoTurma.getNomeAluno(), itemAlunoTurma.getUsuarioAluno()));
+					}
+					break;
+				}
+				event = myParser.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		for(int i=0; i< retorno.size(); i++){
+			Log.i("XMLManager->ArrayList", retorno.get(i).getIdAluno() +" - "+ retorno.get(i).getNomeAluno()+" - "+retorno.get(i).getUsuarioAluno());
+		}
 		return retorno;
 	}
 	

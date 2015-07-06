@@ -2,6 +2,7 @@ package com.example.controledepresencas;
 
 import java.util.ArrayList;
 
+import com.example.controledepresencas.model.ItemAlunoTurma;
 import com.example.controledepresencas.model.ItemPresencaAlunoTurma;
 
 import android.app.Activity;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,7 +26,8 @@ public class ActivityProfConsAlunoTurma extends Activity {
 	private String userName;
 	private String nomeDisciplina;
 	private String turmaId;
-	private ArrayList<ItemPresencaAlunoTurma> ret;
+	private ArrayList<ItemPresencaAlunoTurma> retListPresAlunoTurma;
+	private ArrayList<ItemAlunoTurma> retListAlunoTurma;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,57 +57,62 @@ public class ActivityProfConsAlunoTurma extends Activity {
 	public void listarAlunos() {
 		// aqui vai a chamada rest para listar todos os nomesAlunos de uma
 		// determinada turma...
-
+		
+		//http://localhost:8080/CPresenca/api/presenca/turmaId/1																						
+		//String retorno = RestClient.doRequisition("presenca/turmaId/" + this.turmaId);
+		
+		String retorno = RestClient.doRequisition("presenca/turmaId/"+this.turmaId);
+		retListAlunoTurma =  XmlManager.manageXmlAlunoTurma(retorno);
+		
+		String[] nomesAlunos = new String[retListAlunoTurma.size()];
+		
+		for(int i=0; i< this.retListAlunoTurma.size(); i++){
+			 nomesAlunos[i] = this.retListAlunoTurma.get(i).getNomeAluno();
+			 Log.i("Lista AlunoTurma", retListAlunoTurma.get(i).getIdAluno()+" - "+ retListAlunoTurma.get(i).getNomeAluno()+" - "+ retListAlunoTurma.get(i).getUsuarioAluno());
+		}
+		
+		
 		Spinner listaAlunos = (Spinner) findViewById(R.id.spinnerAlunos);
+		
+		 
+				
+		//String[] nomesDisciplinasTurmas = new String[this.ret.size()];
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nomesAlunos);
+		listaAlunos = (Spinner) findViewById(R.id.spinnerAlunos);
+		listaAlunos.setAdapter(adapter);
+		listaAlunos.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-		// Aqui vai o evento de click que vai atualizar o listview
-		// com as datas e presencas dos nomesAlunos
-		// Aqui dentro precisamos chamar o listarpresencas() toda vez que o
-		// usuario selecionar um aluno diferente
-
-		listaAlunos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				listarPresencas(position);
+				// TODO Auto-generated method stub
+				listarPresencas(position);				
 			}
 
 			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
+			public void onNothingSelected(AdapterView<?> parent) {
 				// TODO Auto-generated method stub
+				
 			}
 		});
+		
 	}
 
 	public void listarPresencas(int pos) {
-		//http:IP:8080/CPresenca/api/presenca/usuario/Joao/turmaId/1
-
-		String retorno = RestClient.doRequisition("presenca/usuario/" + this.userName + "/turmaId/" + this.turmaId);
+		String nomeUsuario;
+		//Exemplo Requisicao Rest
+		//String retorno = RestClient.doRequisition("presenca/usuario/Joao/turmaId/1");
 		
+		nomeUsuario = retListAlunoTurma.get(pos).getUsuarioAluno();
 		
-		this.ret = XmlManager.manageXmlPresencaAlunoTurma(retorno);
+		String retorno = RestClient.doRequisition("presenca/usuario/"+retListAlunoTurma.get(pos).getUsuarioAluno()+"/turmaId/"+this.turmaId);
 		
-		Log.i("ItemPresencaAlunoTurma", this.ret.toString());
+		this.retListPresAlunoTurma = XmlManager.manageXmlPresencaAlunoTurma(retorno);
+		
+		Log.i("ItemPresencaAlunoTurma", this.retListPresAlunoTurma.toString());
 		
 		ListView lv = (ListView) findViewById(R.id.listViewPresencas);
-		lv.setAdapter(new AdapterPresencas(this, this.ret));
-
-		// aqui vai o metodo que vai alterar a presenca do aluno
-		// Vai ser um onClickListener para o listview...
-		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				confirmaAlterarPresenca(position);
-				return true;
-			}
-		});
-		lv.setOnItemClickListener(new OnItemClickListener() {
-
-		    @Override
-		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		    	showToastMessage("Longo click para alterar a presença");
-		    }
-
-		});
+		AdapterPresencas adapter = new AdapterPresencas(this, this.retListPresAlunoTurma);
+		lv.setAdapter(adapter);
 	}
 	
 	private void confirmaAlterarPresenca(int position){
