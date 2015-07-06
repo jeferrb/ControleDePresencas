@@ -30,14 +30,15 @@
     <!-- Tempo do Tick em minutos... -->
     <string name="text_default_tempo_tick">10</string>
     <!-- Porcentagem de Validação da Aula... -->
-	<string name="text_default_porc_val_aula">75</string>
-	<string name="text_nome_disciplina">Disciplina</string>
-	<string-array name="array_spinner">
-		<item>Fulano</item>
-		<item>beltrano</item>
-		<item>Cicrano</item>
-	</string-array>
-    
-    
+    <string name="text_default_porc_val_aula">75</string>
+    <string name="text_nome_disciplina">Disciplina</string>
+	<string name="text_nome_aluno">Nome Aluno</string>
+    <string-array name="array_spinner">
+        <item>Fulano</item>
+        <item>beltrano</item>
+        <item>Cicrano</item>
+    </string-array>
+
+    <string name="title_activity_activity_aluno_cons_presencas">Presencas do Aluno</string>
 
 </resources>

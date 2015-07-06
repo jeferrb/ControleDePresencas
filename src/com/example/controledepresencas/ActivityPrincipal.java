@@ -261,12 +261,22 @@ public class ActivityPrincipal extends Activity {
 	}
 
 	public void onClickConsultarTurmas(View v) {
+		Bundle params = new Bundle();
+		Intent intent;
 		if(this.userType.equals("Professor")){
-			Bundle params = new Bundle();
+			//Usuario do tipo professor
 			params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
 			params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
-	
-			Intent intent = new Intent(this, ActivityProfConsAlunoTurma.class);
+			intent = new Intent(this, ActivityProfConsAlunoTurma.class);
+			intent.putExtras(params);
+			startActivity(intent);
+		}
+		else{
+			//Usuario do tipo aluno
+			params.putString("turmaID", this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
+			params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
+			params.putString("usuarioAluno", this.userName);
+			intent = new Intent(this, ActivityAlunoConsPresencas.class);
 			intent.putExtras(params);
 			startActivity(intent);
 		}

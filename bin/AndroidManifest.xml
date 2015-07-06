@@ -46,11 +46,14 @@
             android:label="@string/title_activity_activity_prof_cons_aluno_turma"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name=".ActivityRelatorioFinalAula"
             android:label="@string/title_activity_relatorio_final_aula"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ActivityAlunoConsPresencas"
+            android:label="@string/title_activity_activity_aluno_cons_presencas" >
         </activity>
     </application>
 
