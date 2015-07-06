@@ -12,7 +12,7 @@
     <string name="text_iniciar_aula">Iniciar Aula</string>
     <string name="title_activity_activity_principal">Controle de Presencas</string>
     <string name="text_nome">Nome</string>
-    <string name="text_turma">Turma: ---</string>
+    <string name="text_turma">Turma:</string>
     <string name="text_tempo_aula">Tempo de Aula</string>
     <string name="text_encerrar_aula">Encerrar Aula</string>
     <string name="title_activity_activity_aula">Aula</string>
@@ -23,13 +23,19 @@
     <string name="text_data">00/00/00</string>
     <string name="title_activity_relatorio_final_aula">ActivityRelatorioFinalAula</string>
     <string name="text_percentagem_presencas">prescentagem</string>
-    <string name="text_nome_turma">Nome da Turma</string>
+    <string name="text_nome_turma">Turma</string>
     <string name="text_tempo_tick">Tempo de Ticks</string>
     <string name="text_porc_val_aula">Porc. Presenca (%)</string>
     <!-- Tempo do Tick em minutos... -->
     <string name="text_default_tempo_tick">10</string>
     <!-- Porcentagem de Validação da Aula... -->
 	<string name="text_default_porc_val_aula">10</string>
+	<string name="text_nome_disciplina">Disciplina</string>
+	<string-array name="array_spinner">
+		<item>Fulano</item>
+		<item>beltrano</item>
+		<item>Cicrano</item>
+	</string-array>
     
     
 

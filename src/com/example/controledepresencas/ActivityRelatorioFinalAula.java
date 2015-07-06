@@ -47,7 +47,7 @@ public class ActivityRelatorioFinalAula extends Activity {
 		//VAi ser melhor passar um unico objeto com todos os dados do listView
 		//Esse objeto pode ser criado de acordo com o xml de resposta
 		//POr enquanto deixamos assim...
-		lv.setAdapter(new AdapterPresencas(this, presencas, nomeAlunos));
+		//lv.setAdapter(new AdapterPresencas(this, presencas, nomeAlunos));
 
 		// aqui vai o metodo que vai alterar a presenca do aluno
 		// Vai ser um onLongClickListener para o listview...

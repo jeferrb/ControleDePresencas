@@ -3,6 +3,7 @@ package com.example.controledepresencas;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.ClipData.Item;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,26 +19,24 @@ public class AdapterPresencas extends BaseAdapter {
 	// no metodo getView vamos preencher com todas as presencas
 
 	private Context context;
-	private ArrayList<Boolean> presencas;
-	private ArrayList<String> datas;
+	private ArrayList<ItemPresencaAlunoTurma> presencasAlunoTurma;
 
-	public AdapterPresencas(Context context, ArrayList<Boolean> presencas, ArrayList<String> datas) {
+	public AdapterPresencas(Context context, ArrayList<ItemPresencaAlunoTurma> presencasAlunoTurma) {
 		this.context = context;
-		this.presencas = presencas;
-		this.datas = datas;
+		this.presencasAlunoTurma = presencasAlunoTurma;
 	}
 
 	@Override
 	public int getCount() {
 		// aqui tem que devolver o total de entradas da lista
 		// o tamanho do vetor de presencas
-		return datas.size();
+		return presencasAlunoTurma.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return datas.get(position);
+		return presencasAlunoTurma.get(position);
 	}
 
 	@Override
@@ -59,11 +58,11 @@ public class AdapterPresencas extends BaseAdapter {
 		}
 
 		TextView dataAula = (TextView) layout.findViewById(R.id.textViewDataAula);
-		dataAula.setText(datas.get(position));
+		dataAula.setText(presencasAlunoTurma.get(position).getDataChamada());
 
 		ImageView imagePresenca = (ImageView) layout.findViewById(R.id.imageViewAusentePresente);
 
-		if (presencas.get(position).equals(true)) {
+		if (presencasAlunoTurma.get(position).isPresente) {
 			imagePresenca.setImageResource(R.drawable.presente);
 		} else {
 			imagePresenca.setImageResource(R.drawable.ausente);

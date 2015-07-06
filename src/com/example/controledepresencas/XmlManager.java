@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.content.ClipData.Item;
 import android.util.Log;
 
 public class XmlManager {
@@ -589,4 +590,51 @@ false
 		return "";
 	}
 
+	public static ArrayList<ItemPresencaAlunoTurma>  manageXmlPresencaAlunoTurma(String rawXml){
+		
+		ItemPresencaAlunoTurma itemPresAlunoTurma = new ItemPresencaAlunoTurma();
+		ArrayList<ItemPresencaAlunoTurma> retorno = new ArrayList<ItemPresencaAlunoTurma>();
+		
+		
+		XmlPullParserFactory xmlFactoryObject;
+		int event;
+		String text = null;
+		try {
+			InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
+			xmlFactoryObject = XmlPullParserFactory.newInstance();
+			XmlPullParser myParser = xmlFactoryObject.newPullParser();
+
+			myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			myParser.setInput(stream, null);
+			event = myParser.getEventType();
+			while (event != XmlPullParser.END_DOCUMENT) {
+				String name = myParser.getName();
+				switch (event) {
+				case XmlPullParser.START_TAG:
+					break;
+				case XmlPullParser.TEXT:
+					text = myParser.getText();
+					break;
+				case XmlPullParser.END_TAG:
+					if (name.equals("diaChamada")) {
+						itemPresAlunoTurma.setDataChamada(text);
+					}
+					if (name.equals("isPresent")) {
+						itemPresAlunoTurma.setPresente(Boolean.parseBoolean(text));
+						Log.i("XMLManager --> item", itemPresAlunoTurma.getDataChamada());
+						retorno.add(new ItemPresencaAlunoTurma(itemPresAlunoTurma.getDataChamada(), itemPresAlunoTurma.isPresente));
+					}
+					break;
+				}
+				event = myParser.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		Log.i("XMLManager", retorno.toString());
+		
+		return retorno;
+	}
+	
 }
