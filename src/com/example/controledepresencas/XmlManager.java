@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import android.content.ClipData.Item;
+import com.example.controledepresencas.model.ItemConsultaTurma;
+import com.example.controledepresencas.model.ItemPresencaAlunoTurma;
+
+import android.R.bool;
 import android.util.Log;
 
 public class XmlManager {
@@ -73,12 +76,19 @@ public class XmlManager {
 		return retorno;
 	}
 
-	public static String[] manageXmlTick(String rawXml) {
+	public static boolean manageXmlTick(String rawXml) {
 		/*
-		 * return[0]: status return[1]:
+		 * return isRecebido
 		 */
 		/*
 		 * input example:
+		 * 
+		 * <ticket><acabouAula>false</acabouAula><isRecebido>true</isRecebido></ticket>
+		 * 
+		 * <ticket>
+			<acabouAula>true</acabouAula>
+			<isRecebido>false</isRecebido>
+			</ticket>
 		 */
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
@@ -102,19 +112,12 @@ public class XmlManager {
 					text = myParser.getText();
 					break;
 				case XmlPullParser.END_TAG:
-					if (name.equals("sucess")) {
-						if (text.equals("false")) {
-							retorno[0] = "Usuário já conectado";
-							return retorno;
-						}
+					if (name.equals("isRecebido")) {
+						return Boolean.parseBoolean(text);
 					}
-					if (name.equals("tipo")) {
+					/*if (name.equals("acabouAula")) {
 						retorno[0] = text;
-					}
-					if (name.equals("chave")) {
-						Log.e(TAG, "Chave: " + text);
-						retorno[1] = text;
-					}
+					}*/
 					break;
 				}
 				event = myParser.next();
@@ -122,7 +125,7 @@ public class XmlManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return retorno;
+		return false;
 	}
 
 	public static String manageXmlLogout(String rawXml) {
@@ -306,8 +309,7 @@ false
 					}
 					if (name.equals("isPresente")) {
 						current[2] = text;
-						retorno.add(current);
-						current = new String[3];
+						retorno.add(new String[]{current[0], current[1], current[2]});
 					}
 					break;
 				}
@@ -543,10 +545,10 @@ false
 		
 		/*
 		 * 
-		
-		
-		
-		
+		<InicializaAula>
+		<causa>Chamada fechada</causa>
+		<isInicializada>false</isInicializada>
+		</InicializaAula>
 		*/
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
@@ -603,7 +605,6 @@ false
 			InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
 			xmlFactoryObject = XmlPullParserFactory.newInstance();
 			XmlPullParser myParser = xmlFactoryObject.newPullParser();
-
 			myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			myParser.setInput(stream, null);
 			event = myParser.getEventType();
@@ -619,10 +620,10 @@ false
 					if (name.equals("diaChamada")) {
 						itemPresAlunoTurma.setDataChamada(text);
 					}
-					if (name.equals("isPresent")) {
+					if (name.equals("isPresente")) {
 						itemPresAlunoTurma.setPresente(Boolean.parseBoolean(text));
 						Log.i("XMLManager --> item", itemPresAlunoTurma.getDataChamada());
-						retorno.add(new ItemPresencaAlunoTurma(itemPresAlunoTurma.getDataChamada(), itemPresAlunoTurma.isPresente));
+						retorno.add(new ItemPresencaAlunoTurma(itemPresAlunoTurma.getDataChamada(), itemPresAlunoTurma.isPresente()));
 					}
 					break;
 				}

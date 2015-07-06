@@ -1,21 +1,17 @@
-package com.example.controledepresencas;
+package com.example.controledepresencas.model;
 
 public class ItemConsultaTurma {
 	boolean chamadaAberta;
 	String nomeDisciplina;
 	String idTurma;
-
-	public ItemConsultaTurma() {
-		
-	}
 	
+	public ItemConsultaTurma() {
+	}
 	public ItemConsultaTurma(boolean chamadaAberta, String nomeDisciplina, String idTurma) {
-		super();
 		this.chamadaAberta = chamadaAberta;
 		this.nomeDisciplina = nomeDisciplina;
 		this.idTurma = idTurma;
 	}
-	
 	public boolean isChamadaAberta() {
 		return chamadaAberta;
 	}

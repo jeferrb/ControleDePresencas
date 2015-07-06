@@ -5,53 +5,41 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 public class ActivityRelatorioFinalAula extends Activity {
 	private ArrayList<String> nomesAlunos;
-	private ArrayList<Boolean> presencas;
-	private int idTurma;
+	private ArrayList<String> presencaAlunos;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_relatorio_final_aula);
-		//TODO exibir relatorio recebido da ActivityAula
-		
+		Intent intent = getIntent();
+		if (intent != null) {
+			Bundle params = intent.getExtras();
+			if (params != null) {
+				this.nomesAlunos = params.getStringArrayList("nomesAlunos");
+				this.presencaAlunos = params.getStringArrayList("presencaAlunos");
+				((TextView)findViewById(R.id.textViewNomeTurma)).setText(params.getString("nomeDisciplina"));
+			}
+		}
 		listarPresencaAlunos();
 		
 	}
 	
 	public void listarPresencaAlunos() {
-		// TODO fazer a chamada rest  de final de aula aqui ou antes
-		//confome a logica do sistema
-		ArrayList<Boolean> presencas = new ArrayList<Boolean>();
-		presencas.add(true);
-		presencas.add(false);
-		presencas.add(true);
-		presencas.add(true);
-		presencas.add(false);
-		ArrayList<String> nomeAlunos = new ArrayList<String>();
-		nomeAlunos.add("Pedro");
-		nomeAlunos.add("Jefferson");
-		nomeAlunos.add("Hernani");
-		nomeAlunos.add("Daniela");
-		nomeAlunos.add("Priscila");
 
 		ListView lv = (ListView) findViewById(R.id.listViewPresencas);
-		//VAi ser melhor passar um unico objeto com todos os dados do listView
-		//Esse objeto pode ser criado de acordo com o xml de resposta
-		//POr enquanto deixamos assim...
-		//lv.setAdapter(new AdapterPresencas(this, presencas, nomeAlunos));
+		lv.setAdapter(new AdapterRelatorioFinalAula(this, presencaAlunos, nomesAlunos));
 
-		// aqui vai o metodo que vai alterar a presenca do aluno
-		// Vai ser um onLongClickListener para o listview...
-		
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -70,11 +58,8 @@ public class ActivityRelatorioFinalAula extends Activity {
 	}
 	
 	private void confirmaAlterarPresenca(int position){
-		//TODO rest alterar
-		//TODO Pedrir confirmação e enviar alteração
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		//currentPosition = position;
-		builder.setMessage("Tem certeza que desaja alterar a presença de "/* TODO + nomesAlunos[position]*/).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+		builder.setMessage("Tem certeza que desaja alterar a presença de "+ nomesAlunos.get(position)+"?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				enviarSolicitacaoAlterarPresenca();

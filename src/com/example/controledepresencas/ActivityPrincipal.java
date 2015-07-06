@@ -2,9 +2,10 @@ package com.example.controledepresencas;
 
 import java.util.ArrayList;
 
+import com.example.controledepresencas.model.ItemConsultaTurma;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,15 +27,7 @@ public class ActivityPrincipal extends Activity {
 	private final String TIPO_PROFESSOR = "Professor";
 	private final String TIPO_ALUNO = "Aluno";
 	private String userName, userType;
-
-/*	private String[] nomesTurmas;
-	private String[] IdTurmas;
-	private boolean[] isOpenTurmas;
-	*/
 	private Spinner listaTurmas;
-	private String[] nomesDisciplinasTurmas;
-	/*private String[] IdTurmas;
-	private boolean[] isOpenTurmas;*/
 	private ArrayList<ItemConsultaTurma> ret;
 
 	@Override
@@ -130,13 +123,10 @@ public class ActivityPrincipal extends Activity {
 				try {// may occur a fail or there are no classes registered
 					if (userType.equals("Aluno")) {
 						//butaoIniciarAula.setEnabled(isOpenTurmas[position]);
-						butaoIniciarAula.setEnabled(ret.get(position).chamadaAberta);
-						//butaoConsultarTurma.setEnabled(isOpenTurmas[position]);
-						butaoConsultarTurma.setEnabled(ret.get(position).chamadaAberta);
+						butaoIniciarAula.setEnabled(ret.get(position).isChamadaAberta());
 					} else if (userType.equals("Professor")) {
 						butaoIniciarAula.setText("Abrir Aula");
-						butaoIniciarAula.setEnabled(!ret.get(position).chamadaAberta);
-						butaoConsultarTurma.setEnabled(ret.get(position).chamadaAberta);
+						butaoIniciarAula.setEnabled(!ret.get(position).isChamadaAberta());
 					}
 
 				} catch (Exception e) {
@@ -201,6 +191,26 @@ public class ActivityPrincipal extends Activity {
 	public void onClickIniciarChamada(View v) {
 		String retorno = "";
 		if (userType.equals("Professor")) {
+			//EditText porpEdit = (EditText)findViewById(R.id.textViewPorcValAula);
+			String porpe = "10";//porpEdit.getText().toString();
+			String dura = "10";//((EditText)findViewById(R.id.editTextTempoTick)).getText().toString();
+			if(dura.length()==0||porpe.length()==0){
+				showToastMessage("Os parametros de aula são campos obrigatórios");
+				return;
+			}
+			try {
+				if(Integer.parseInt(porpe)>100||Integer.parseInt(porpe)<0){
+					showToastMessage("Porcentagem vai de 0 a 100");
+					return;
+				}
+				if(Integer.parseInt(dura)<1){
+					showToastMessage("Duração da aula muito pequena");
+					return;
+				}
+			} catch (Exception e) {
+				showToastMessage("Parametros de aula inválidos");
+				return;
+			}
 			// Iniciar chamada http://10.0.0.105:8080/CPresenca/api/aula/usuario/Eliane/turmaId/1/posix/1/posiy/1
 			// Check Aluno http://10.0.0.105:8080/CPresenca/api/ aula/aluno/Eliane/turmaId/1
 			GPSTracker gps = new GPSTracker(ActivityPrincipal.this);
@@ -215,8 +225,7 @@ public class ActivityPrincipal extends Activity {
 				Log.e("latitude", Double.toString(latitude));
 				Log.e("longitude", Double.toString(longitude));
 				showToastMessage("Entrando em aula\nLat: " + latitude + "\nLong: " + longitude);
-				retorno = RestClient.doRequisition("aula/usuario/" + userName + "/turmaId/" + this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma() + "/posix/" + latitude+ "/posiy/" + longitude);
-				
+				retorno = RestClient.doRequisition("aula/usuario/" + userName + "/turmaId/" + this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma() + "/posix/" + latitude+ "/posiy/" + longitude + "/porpre/" + porpe +	"/dura/" + dura);
 			} else {
 				// Can't get location.
 				// GPS or network is not enabled.
@@ -227,7 +236,6 @@ public class ActivityPrincipal extends Activity {
 			retorno = RestClient.doRequisition("aula/aluno/" + userName + "/turmaId/" + this.ret.get(listaTurmas.getSelectedItemPosition()).getIdTurma());
 		}
 //TODO
-		//TODO
 		if (!retorno.equals("")) {
 			Log.e(TAG, retorno);
 			String ret[] = XmlManager.manageXmlInicairChamada(retorno);

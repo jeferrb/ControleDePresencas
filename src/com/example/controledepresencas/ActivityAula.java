@@ -18,11 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityAula extends Activity {
+	private final String TAG = "ActivityAula";
 	private final String TIPO_PROFESSOR = "Professor";
 	private final String TIPO_ALUNO = "Aluno";
 	private String turmaID, userName, userType, chamdaID, nomeDisciplina;
 
-	private long timeOut = 100;// milliseconds
+	private long freqEnvioTick = 3000;// milliseconds
 	private Timer myTimer;
 	private GPSTracker gps = new GPSTracker(ActivityAula.this);
 	final ActivityAula thisActivity = this;
@@ -45,7 +46,7 @@ public class ActivityAula extends Activity {
 		}
 		ajustarTela();
 		if(userType.equals("Aluno")){
-			//TODO sendtick
+			sendTick();
 		}
 	}
 
@@ -53,6 +54,7 @@ public class ActivityAula extends Activity {
 		// Ajustando Tela Aluno e Professor
 		TextView textView;
 		textView = (TextView) findViewById(R.id.textViewTipoUsuario);
+		((TextView)findViewById(R.id.textViewTurma)).setText(nomeDisciplina);
 		ImageView imgView;
 		imgView = (ImageView) findViewById(R.id.imageViewProfessorAluno);
 		if (this.userType.equals(TIPO_PROFESSOR)) {
@@ -84,13 +86,27 @@ public class ActivityAula extends Activity {
 
 	private void enviarSolicitacaoEncerrarAula() {
 		if (userType.equals("Professor")) {
-			ArrayList<String[]> retorno = new ArrayList<String[]>();
 			String retorno01 = RestClient.doRequisition("aula/turmaId/" + turmaID);
-			retorno = XmlManager.manageXmlFinalizarChamada(retorno01);
+			ArrayList<String[]> retorno = XmlManager.manageXmlFinalizarChamada(retorno01);
 			if (retorno.get(0).length==1) {
 				showPopUpMessage(retorno.get(0)[0]);
 			} else {
-				//TODO passar o arraylista para a tela do Pedro
+				ArrayList<String> nomesAlunos = new ArrayList<String>();
+				ArrayList<String> presencaAlunos = new ArrayList<String>();
+				for (int i = 0; i < retorno.size(); i++) {
+					Log.e(TAG,retorno.get(i)[0]);
+					nomesAlunos.add(retorno.get(i)[0]);
+					presencaAlunos.add(retorno.get(i)[2]);
+				}
+				Bundle params = new Bundle ();
+				params.putStringArrayList("nomesAlunos", nomesAlunos);
+				params.putStringArrayList("presencaAlunos", presencaAlunos);
+				params.putString("nomeDisciplina", this.nomeDisciplina);
+				Intent intent = new Intent(this, ActivityRelatorioFinalAula.class);
+				intent.putExtras(params);
+				
+				startActivity(intent);
+				finish();
 			}
 		} else if (userType.equals("Aluno")) {
 			String retorno = "";
@@ -101,6 +117,7 @@ public class ActivityAula extends Activity {
 				finish();
 			} else {
 				showPopUpMessage(retorno);
+				finish();
 			}
 		}
 	}
@@ -148,35 +165,16 @@ public class ActivityAula extends Activity {
 						double longitude = gps.getLongitude();
 						Log.e("latitude", Double.toString(latitude));
 						Log.e("longitude", Double.toString(longitude));
-						showToastMessage("Lat: " + latitude + "\nLong: " + longitude);
 						String retorno = RestClient.doRequisition("aula/aluno/" + userName + "/posix/" + Double.toString(latitude) + "/posiy/" + Double.toString(longitude));
-						String[] ret = XmlManager.manageXmlTick(retorno);
-						if (!ret[0].equals("Sucesso")) {
-							// TODO
-							showToastMessage("Aula encerrada XX% de presença");
-							encerrarAulaLocalmente();
+						if (XmlManager.manageXmlTick(retorno)) { // return isRecebido
+							showToastMessage("Tick enviado\nLat: " + latitude + "\nLong: " + longitude);	
+						}else{
+							enviarSolicitacaoEncerrarAula();
 						}
 					}
 				});
 			}
-
-			private void encerrarAulaLocalmente() {
-				try {
-					gps.stopUsingGPS();
-					myTimer.cancel();
-					Bundle params = new Bundle();
-					params.putString("nome", userName);
-					params.putString("tipo", userType);
-
-					Intent intent = new Intent(thisActivity, ActivityPrincipal.class);
-					intent.putExtras(params);
-					startActivity(intent);
-					finish();
-				} catch (Exception e) {
-					// Do Nothing
-				}
-			}
-		}, 0, timeOut);
+		}, 0, freqEnvioTick);
 	}
 	
 	public void listarPresencasFinalAula(){

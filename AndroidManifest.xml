@@ -38,10 +38,15 @@
         </activity>
         <activity
             android:name=".ActivityAlterarPresencas"
-            android:name=".ActivityProfConsAlunoTurma"
             android:label="@string/title_activity_activity_alterar_presencas"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".ActivityProfConsAlunoTurma"
+            android:label="@string/title_activity_activity_prof_cons_aluno_turma"
+            android:screenOrientation="portrait" >
+        </activity>
+        
         <activity
             android:name=".ActivityRelatorioFinalAula"
             android:label="@string/title_activity_relatorio_final_aula"

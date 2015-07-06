@@ -138,13 +138,11 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginEnd="50dp"
 		        android:layout_marginStart="50dp"
-		        android:background="#3FB041"
 		        android:onClick="onClickIniciarChamada"
 		        android:text="@string/text_iniciar_aula"
 		        android:textColor="#FFFFFF"
 		        android:textStyle="bold"
 		        android:layout_marginTop="20dp" />
-	
 	        <Button
 	            android:id="@+id/ButtonConsultarTurma"
 	            android:layout_width="fill_parent"
@@ -152,7 +150,6 @@
 	            android:layout_marginEnd="50dp"
 	            android:layout_marginStart="50dp"
 	            android:layout_marginTop="20dp"
-	            android:background="#3FB041"
 	            android:onClick="onClickConsultarTurmas"
 	            android:text="@string/text_consultar_turma"
 	            android:textColor="#FFFFFF"

@@ -12,14 +12,13 @@ import android.widget.TextView;
 
 public class AdapterRelatorioFinalAula extends BaseAdapter {
 	private Context context;
-	private ArrayList<Boolean> presencas;
+	private ArrayList<String> presencas;
 	private ArrayList<String> nomeAlunos;
 	
-	public AdapterRelatorioFinalAula(Context context, ArrayList<Boolean> presencas, ArrayList<String> nomeAlunos) {
+	public AdapterRelatorioFinalAula(Context context, ArrayList<String> presencas, ArrayList<String> nomeAlunos) {
 		this.context = context;
 		this.presencas = presencas;
 		this.nomeAlunos = nomeAlunos;
-		
 	}
 
 	@Override
@@ -43,7 +42,7 @@ public class AdapterRelatorioFinalAula extends BaseAdapter {
 
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			layout = inflater.inflate(R.layout.linha_lista_presencas_final_aula, parent);
+			layout = inflater.inflate(R.layout.linha_lista_presencas_final_aula, null);
 		} else {
 			layout = convertView;
 		}
@@ -53,7 +52,7 @@ public class AdapterRelatorioFinalAula extends BaseAdapter {
 
 		ImageView imagePresenca = (ImageView) layout.findViewById(R.id.imageViewAusentePresente);
 
-		if (presencas.get(position).equals(true)) {
+		if (presencas.get(position).equals("true")) {
 			imagePresenca.setImageResource(R.drawable.presente);
 		} else {
 			imagePresenca.setImageResource(R.drawable.ausente);

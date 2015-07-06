@@ -19,6 +19,7 @@
     <string name="text_consultar_turma">Consultar Turma</string>
     <string name="text_em_aula">Em aula</string>
     <string name="title_activity_activity_alterar_presencas">Alteração de Presenças</string>
+    <string name="title_activity_activity_prof_cons_aluno_turma">Consulta de Aluno</string>
     <string name="text_selecione_aluno">Selecione o Aluno</string>
     <string name="text_data">00/00/00</string>
     <string name="title_activity_relatorio_final_aula">ActivityRelatorioFinalAula</string>
@@ -29,7 +30,7 @@
     <!-- Tempo do Tick em minutos... -->
     <string name="text_default_tempo_tick">10</string>
     <!-- Porcentagem de Validação da Aula... -->
-	<string name="text_default_porc_val_aula">10</string>
+	<string name="text_default_porc_val_aula">75</string>
 	<string name="text_nome_disciplina">Disciplina</string>
 	<string-array name="array_spinner">
 		<item>Fulano</item>

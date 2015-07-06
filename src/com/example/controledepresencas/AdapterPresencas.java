@@ -2,8 +2,9 @@ package com.example.controledepresencas;
 
 import java.util.ArrayList;
 
+import com.example.controledepresencas.model.ItemPresencaAlunoTurma;
+
 import android.content.Context;
-import android.content.ClipData.Item;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ public class AdapterPresencas extends BaseAdapter {
 		this.context = context;
 		this.presencasAlunoTurma = presencasAlunoTurma;
 	}
-
 	@Override
 	public int getCount() {
 		// aqui tem que devolver o total de entradas da lista
@@ -52,7 +52,7 @@ public class AdapterPresencas extends BaseAdapter {
 
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			layout = inflater.inflate(R.layout.linha_lista_presencas_aluno, parent);
+			layout = inflater.inflate(R.layout.linha_lista_presencas_aluno, null);
 		} else {
 			layout = convertView;
 		}
@@ -62,7 +62,7 @@ public class AdapterPresencas extends BaseAdapter {
 
 		ImageView imagePresenca = (ImageView) layout.findViewById(R.id.imageViewAusentePresente);
 
-		if (presencasAlunoTurma.get(position).isPresente) {
+		if (presencasAlunoTurma.get(position).isPresente()) {
 			imagePresenca.setImageResource(R.drawable.presente);
 		} else {
 			imagePresenca.setImageResource(R.drawable.ausente);
