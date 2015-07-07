@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.util.Log;
+
 import com.example.controledepresencas.model.ItemAlunoTurma;
 import com.example.controledepresencas.model.ItemConsultaTurma;
 import com.example.controledepresencas.model.ItemPresencaAlunoTurma;
-
-import android.R.bool;
-import android.util.Log;
 
 public class XmlManager {
 	static String TAG = "XmlManager";

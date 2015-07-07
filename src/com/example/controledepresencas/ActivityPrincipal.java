@@ -84,19 +84,9 @@ public class ActivityPrincipal extends Activity {
 	public void listarTurmas() {
 		// http://crunchify.com/how-to-iterate-through-java-list-4-way-to-iterate-through-loop/
 		String retorno = RestClient.doRequisition("aula/usuario/" + this.userName + "/tipo/" + this.userType);
-		//ArrayList<ItemConsultaTurma> ret = XmlManager.manageXmlTurmas(retorno);
-		//nomesTurmas = new String[ret.size()];
-		// String retorno = "";
+
 		this.ret = XmlManager.manageXmlTurmas(retorno);
-		
-		/*nomesDisciplinas = new String[ret.size()];
-		IdTurmas = new String[ret.size()];
-		isOpenTurmas = new boolean[ret.size()];
-		for (int i = 0; i < ret.size(); i++) {
-			IdTurmas[i] = ret.get(i)[0];
-			nomesDisciplinas[i] = ret.get(i)[1];
-			isOpenTurmas[i] = Boolean.parseBoolean(ret.get(i)[2]);
-		}*/
+
 		String[] nomesDisciplinasTurmas = new String[this.ret.size()];
 		
 		for(int i=0; i< this.ret.size(); i++){
@@ -136,9 +126,7 @@ public class ActivityPrincipal extends Activity {
 			}
 
 			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
-				
+			public void onNothingSelected(AdapterView<?> parent) {				
 			}
 			
 		});
