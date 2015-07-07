@@ -237,7 +237,7 @@ public class ActivityPrincipal extends Activity {
 				params.putString("tipo", this.userType);
 				params.putString("chamdaID", (this.userType.equals("Aluno") ? ret[1] : ""));
 				params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
-				params.putInt("freqEnvioTick", Integer.parseInt(ret[2]));
+				if(this.userType.equals("Aluno")) params.putInt("freqEnvioTick", Integer.parseInt(ret[2]));
 				Intent intent = new Intent(this, ActivityAula.class);
 				intent.putExtras(params);
 				startActivity(intent);
