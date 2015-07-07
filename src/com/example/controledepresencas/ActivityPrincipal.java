@@ -179,13 +179,15 @@ public class ActivityPrincipal extends Activity {
 	public void onClickIniciarChamada(View v) {
 		String retorno = "";
 		if (userType.equals("Professor")) {
-			String porpe = ((EditText)findViewById(R.id.textViewPorcValAula)).getText().toString();
+			String porpe = ((EditText)findViewById(R.id.editTextPorcValAula)).getText().toString();
 			String dura =((EditText)findViewById(R.id.editTextTempoTick)).getText().toString();
 			if(dura.length()==0||porpe.length()==0){
 				showToastMessage("Os parametros de aula são campos obrigatórios");
 				return;
 			}
 			try {
+				Log.i("porpe", porpe);
+				Log.i("dura", dura);
 				if(Integer.parseInt(porpe)>100||Integer.parseInt(porpe)<0){
 					showToastMessage("Porcentagem vai de 0 a 100");
 					return;
@@ -196,6 +198,7 @@ public class ActivityPrincipal extends Activity {
 				}
 			} catch (Exception e) {
 				showToastMessage("Parametros de aula inválidos");
+				e.printStackTrace();
 				return;
 			}
 			// Iniciar chamada http://10.0.0.105:8080/CPresenca/api/aula/usuario/Eliane/turmaId/1/posix/1/posiy/1
