@@ -17,6 +17,7 @@
     <string name="text_encerrar_aula">Encerrar Aula</string>
     <string name="title_activity_activity_aula">Aula</string>
     <string name="text_consultar_turma">Consultar Turma</string>
+    <string name="text_atualizar_tela">Atualizar Tela</string>
     <string name="text_em_aula">Em aula</string>
     <string name="title_activity_activity_alterar_presencas">Alteração de Presenças</string>
     <string name="title_activity_activity_prof_cons_aluno_turma">Consulta de Aluno</string>

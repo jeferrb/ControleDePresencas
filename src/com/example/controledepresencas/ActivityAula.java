@@ -23,7 +23,7 @@ public class ActivityAula extends Activity {
 	private final String TIPO_ALUNO = "Aluno";
 	private String turmaID, userName, userType, chamdaID, nomeDisciplina;
 
-	private long freqEnvioTick = 3000;// milliseconds
+	private long freqEnvioTick; //= 30000;// milliseconds
 	private Timer myTimer;
 	private GPSTracker gps = new GPSTracker(ActivityAula.this);
 	final ActivityAula thisActivity = this;
@@ -40,6 +40,7 @@ public class ActivityAula extends Activity {
 				this.userName = params.getString("nome");
 				this.userType = params.getString("tipo");
 				this.chamdaID = params.getString("chamdaID");
+				this.freqEnvioTick = params.getInt("freqEnvioTick")*1000*60;
 				this.nomeDisciplina = params.getString("nomeDisciplina");
 				showToastMessage("ID da turma: " + turmaID);
 			}
@@ -111,15 +112,21 @@ public class ActivityAula extends Activity {
 		} else if (userType.equals("Aluno")) {
 			String retorno = "";
 			retorno = RestClient.doRequisition("aula/aluno/" + userName +"/chamada/"+ this.chamdaID);
-			retorno = XmlManager.manageXmlCheckOutAluno(retorno);
+			//Log.e(TAG, retorno);
+			Boolean retorno2 = XmlManager.manageXmlCheckOutAluno(retorno);
 			// TODO create manageXmlCheckOutAluno
-			if (retorno.equals("Sucesso")) {
-				finish();
-			} else {
-				showPopUpMessage(retorno);
-				finish();
+			myTimer.cancel();
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(retorno2?"Chamada finalizada, presença computada":"Chamada finalizada\nAluno AUSENTE\nContate o Professor").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						finish();
+					}
+				});
+				builder.show();
+				
 			}
-		}
+
 	}
 
 	private void showPopUpMessage(String message) {

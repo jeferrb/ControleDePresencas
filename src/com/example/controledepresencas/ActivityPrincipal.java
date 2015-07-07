@@ -2,8 +2,6 @@ package com.example.controledepresencas;
 
 import java.util.ArrayList;
 
-import com.example.controledepresencas.model.ItemConsultaTurma;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.controledepresencas.model.ItemConsultaTurma;
 
 public class ActivityPrincipal extends Activity {
 
@@ -191,9 +191,8 @@ public class ActivityPrincipal extends Activity {
 	public void onClickIniciarChamada(View v) {
 		String retorno = "";
 		if (userType.equals("Professor")) {
-			//EditText porpEdit = (EditText)findViewById(R.id.textViewPorcValAula);
-			String porpe = "10";//porpEdit.getText().toString();
-			String dura = "10";//((EditText)findViewById(R.id.editTextTempoTick)).getText().toString();
+			String porpe = ((EditText)findViewById(R.id.textViewPorcValAula)).getText().toString();
+			String dura =((EditText)findViewById(R.id.editTextTempoTick)).getText().toString();
 			if(dura.length()==0||porpe.length()==0){
 				showToastMessage("Os parametros de aula são campos obrigatórios");
 				return;
@@ -247,6 +246,7 @@ public class ActivityPrincipal extends Activity {
 				params.putString("tipo", this.userType);
 				params.putString("chamdaID", (this.userType.equals("Aluno") ? ret[1] : ""));
 				params.putString("nomeDisciplina", this.ret.get(listaTurmas.getSelectedItemPosition()).getNomeDisciplina());
+				params.putInt("freqEnvioTick", Integer.parseInt(ret[2]));
 				Intent intent = new Intent(this, ActivityAula.class);
 				intent.putExtras(params);
 				startActivity(intent);
@@ -280,6 +280,9 @@ public class ActivityPrincipal extends Activity {
 			intent.putExtras(params);
 			startActivity(intent);
 		}
+	}
+	public void onClickRefreshScreen(View view){
+		listarTurmas();
 	}
 
 }

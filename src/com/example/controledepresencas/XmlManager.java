@@ -85,6 +85,7 @@ public class XmlManager {
 		 * input example:
 		 * 
 		 * <ticket><acabouAula>false</acabouAula><isRecebido>true</isRecebido></ticket>
+		 * <ticket><acabouAula>true</acabouAula><isRecebido>false</isRecebido></ticket>
 		 * 
 		 * <ticket>
 			<acabouAula>true</acabouAula>
@@ -389,22 +390,27 @@ false
 
 	public static String[] manageXmlInicairChamada(String rawXml) {
 		/*
-		 * input example:
+		 * output example: [isInicializada, chamdaID, tempoTicket]
+		 * output example: [false, causa]
 		 * 
+		 * prof:
 		 * <InicializaAula> <isInicializada>true</isInicializada>
 		 * </InicializaAula>
 		 * 
 		 *  OU
 		 *  
-<InicializaAula>
-<chamdaID>29</chamdaID>
-<isInicializada>true</isInicializada>
-</InicializaAula>
+		 *  aluno:
+			<InicializaAula>
+			<chamdaID>42</chamdaID> 
+			<isInicializada>true</isInicializada> 
+			<tempoTicket>2</tempoTicket> 
+			</InicializaAula>
+  
 		 */
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
 		String text = null;
-		String[] retorno = new String[2];
+		String[] retorno = new String[3];
 		try {
 			InputStream stream = new ByteArrayInputStream(rawXml.getBytes("UTF-8"));
 			xmlFactoryObject = XmlPullParserFactory.newInstance();
@@ -424,17 +430,17 @@ false
 				case XmlPullParser.END_TAG:
 					if (name.equals("isInicializada")) {
 						retorno[0]=text;
-						return retorno;
 					}
 					if (name.equals("causa")) {
-						retorno[0] = "Falha";
+						retorno[0] = "false";
 						retorno[1] = text;
 						return retorno;
 					}
 					if (name.equals("chamdaID")) {
-						retorno[0] = "true";
 						retorno[1] = text;
-						return retorno;
+					}
+					if (name.equals("tempoTicket")) {
+						retorno[2] = text;
 					}
 					break;
 				}
@@ -542,9 +548,14 @@ false
 	}
 
 	
-	public static String manageXmlCheckOutAluno(String rawXml) {
+	public static boolean manageXmlCheckOutAluno(String rawXml) {
 		
 		/*
+		 * 
+		 * 
+		 * return isPresente;
+		 * 
+		 *<InicializaAula><isInicializada>false</isInicializada><isPresente>true</isPresente></InicializaAula>
 		 * 
 		<InicializaAula>
 		<causa>Chamada fechada</causa>
@@ -571,9 +582,9 @@ false
 					text = myParser.getText();
 					break;
 				case XmlPullParser.END_TAG:
-					/*if (name.equals("chamadaAberta")) {
-						current[2] = text;
-					}
+					if (name.equals("isPresente")) {
+						return Boolean.parseBoolean(text);
+					}/*
 					if (name.equals("idTurma")) {
 						current[0] = text;
 					}
@@ -590,7 +601,7 @@ false
 			e.printStackTrace();
 		}
 		// TODO
-		return "";
+		return false;
 	}
 
 	public static ArrayList<ItemPresencaAlunoTurma>  manageXmlPresencaAlunoTurma(String rawXml){

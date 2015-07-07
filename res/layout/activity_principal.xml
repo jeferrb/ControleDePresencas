@@ -154,6 +154,17 @@
 	            android:text="@string/text_consultar_turma"
 	            android:textColor="#FFFFFF"
 	            android:textStyle="bold" />
+	        <Button
+	            android:id="@+id/ButtonRefreshScreen"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginEnd="50dp"
+	            android:layout_marginStart="50dp"
+	            android:layout_marginTop="20dp"
+	            android:onClick="onClickRefreshScreen"
+	            android:text="@string/text_atualizar_tela"
+	            android:textColor="#FFFFFF"
+	            android:textStyle="bold" />
 		</LinearLayout>
     </LinearLayout>
     <LinearLayout
