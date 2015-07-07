@@ -42,7 +42,7 @@ public class ActivityAula extends Activity {
 				this.chamdaID = params.getString("chamdaID");
 				this.freqEnvioTick = params.getInt("freqEnvioTick")*1000*60;
 				this.nomeDisciplina = params.getString("nomeDisciplina");
-				showToastMessage("ID da turma: " + turmaID);
+				showToastMessage("chamdaID: " + chamdaID);
 			}
 		}
 		ajustarTela();
@@ -112,7 +112,8 @@ public class ActivityAula extends Activity {
 		} else if (userType.equals("Aluno")) {
 			String retorno = "";
 			retorno = RestClient.doRequisition("aula/aluno/" + userName +"/chamada/"+ this.chamdaID);
-			//Log.e(TAG, retorno);
+			Log.e(TAG, "-------");
+			Log.e(TAG, retorno);
 			Boolean retorno2 = XmlManager.manageXmlCheckOutAluno(retorno);
 			// TODO create manageXmlCheckOutAluno
 			myTimer.cancel();

@@ -405,6 +405,11 @@ false
 			<tempoTicket>2</tempoTicket> 
 			</InicializaAula>
   
+<InicializaAula>
+<chamdaID>117</chamdaID>
+<isInicializada>true</isInicializada>
+<tempoTicket>10</tempoTicket>
+</InicializaAula>"
 		 */
 		XmlPullParserFactory xmlFactoryObject;
 		int event;
@@ -448,7 +453,6 @@ false
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		retorno[1] = text_network_fail;
 		return retorno;
 	}
 	public static String manageXmlCheckIn(String rawXml) {

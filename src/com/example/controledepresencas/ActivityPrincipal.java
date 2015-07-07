@@ -227,6 +227,7 @@ public class ActivityPrincipal extends Activity {
 		}
 //TODO
 		if (!retorno.equals("")) {
+			Log.e(TAG, "aquifode");
 			Log.e(TAG, retorno);
 			String ret[] = XmlManager.manageXmlInicairChamada(retorno);
 			if (ret[0].equals("true")) {
